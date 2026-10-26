@@ -1,0 +1,99 @@
+/*
+  youtube-redesign — design tokens
+  ================================
+  Single source of truth for colors, radii, spacing, type and shadows.
+  Palette is ground-truthed against the Figma mockups in
+  "YouTube Redesign (Community)/": near-black canvas (#0f0f0f/#181818),
+  dark gray cards & chips (#1f1f1f/#272727), white active pill chips,
+  crimson/red accent (#f03 / #e70b3c), 12–16px radii, bold rounded
+  geometric sans (Figtree).
+
+  Naming convention: --yt-<group>-<role> . Plain CSS only (no Tailwind).
+*/
+
+:root {
+  color-scheme: dark;
+
+  /* ----------------------------- Canvas & surfaces ------------------- */
+  --yt-page:        #0f0f0f;  /* app background            */
+  --yt-surface:     #181818;  /* panels, sidebar rail, modals */
+  --yt-card:        #1f1f1f;  /* cards, chips, thumbnails gen  */
+  --yt-elevated:    #272727;  /* hover state, popovers, raised */
+  --yt-overlay:     rgba(0, 0, 0, 0.66); /* scrim behind modals */
+
+  /* ----------------------------- Lines ------------------------------- */
+  --yt-border:        rgba(255, 255, 255, 0.08);
+  --yt-border-strong: rgba(255, 255, 255, 0.16);
+
+  /* ----------------------------- Ink --------------------------------- */
+  --yt-text:       #ffffff;
+  --yt-text-soft:  #aaaaaa;  /* secondary: channels, meta rows   */
+  --yt-text-dim:   #717171;  /* tertiary: disabled, hints        */
+  --yt-on-accent:  #ffffff;
+
+  /* ----------------------------- Accent ------------------------------ */
+  --yt-accent:        #e70b3c;               /* crimson — active pills, badges, CTAs */
+  --yt-accent-bright: #ff0033;               /* brighter red — logo, hover */
+  --yt-accent-soft:   rgba(231, 11, 60, 0.16);
+
+  /* ----------------------------- Chips ------------------------------- */
+  --yt-chip-bg:        var(--yt-card);
+  --yt-chip-hover:     var(--yt-elevated);
+  --yt-chip-active-bg: #ffffff;
+  --yt-chip-active-fg: #0f0f0f;
+
+  /* ----------------------------- Radii ------------------------------- */
+  --yt-radius-xs:   8px;      /* small badges, inline tags   */
+  --yt-radius-sm:   10px;     /* inputs, menu rows           */
+  --yt-radius-md:   12px;     /* buttons, Notifs/Share cards */
+  --yt-radius-lg:   16px;     /* video/shorts thumbnails, card containers */
+  --yt-radius-xl:   20px;     /* modals, shelves             */
+  --yt-radius-pill: 9999px;   /* chips, avatars, pills       */
+
+  /* ----------------------------- Spacing (4px base) ------------------ */
+  --yt-space-1:  4px;
+  --yt-space-2:  8px;
+  --yt-space-3:  12px;
+  --yt-space-4:  16px;
+  --yt-space-5:  20px;
+  --yt-space-6:  24px;
+  --yt-space-8:  32px;
+  --yt-space-10: 40px;
+  --yt-space-12: 48px;
+  --yt-space-16: 64px;
+
+  /* ----------------------------- Typography -------------------------- */
+  --yt-font: 'Figtree Variable', 'Figtree', ui-rounded, system-ui,
+    -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  --yt-weight-regular:  400;
+  --yt-weight-medium:   500;
+  --yt-weight-semibold: 600;
+  --yt-weight-bold:     700;
+  --yt-weight-extrabold: 800;
+  --yt-weight-black:    900;
+
+  --yt-fs-xs:   12px;  /* captions, duration badges     */
+  --yt-fs-sm:   13px;  /* chip labels, meta rows        */
+  --yt-fs-md:   14px;  /* default body                  */
+  --yt-fs-lg:   16px;  /* video titles                  */
+  --yt-fs-xl:   18px;  /* shelf titles                  */
+  --yt-fs-2xl:  20px;  /* panel headings                */
+  --yt-fs-3xl:  24px;  /* page headings                 */
+  --yt-fs-4xl:  32px;  /* hero / channel titles         */
+
+  --yt-line-tight:   1.15;  /* display / titles    */
+  --yt-line-snug:    1.3;   /* video titles        */
+  --yt-line-normal:  1.5;   /* body                */
+
+  /* ----------------------------- Shadows ----------------------------- */
+  --yt-shadow-card:  0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.25);
+  --yt-shadow-panel: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --yt-shadow-modal: 0 16px 48px rgba(0, 0, 0, 0.55);
+
+  /* ----------------------------- Elevation (z) ----------------------- */
+  --yt-z-topbar:  100;
+  --yt-z-panel:   200;   /* notifs popover, side panels */
+  --yt-z-modal:   300;   /* share / personalize dialogs */
+  --yt-z-context: 400;   /* context menus on top of all */
+}
