@@ -203,29 +203,6 @@
     }
   }
 
-  /*
-    Tablet breakpoint: keep the expanded rail only when there's room for
-    the feed to stay >= 360px wide. Otherwise force the collapsed rail so
-    the sticky sidebar never straddles over page content.
-  */
-  @media (min-width: 769px) and (max-width: 1099px) {
-    .shell-body .sidebar:not(.collapsed) {
-      width: var(--yt-sidebar-collapsed);
-      padding-inline: var(--yt-space-2);
-    }
-    .shell-body .sidebar:not(.collapsed) .label,
-    .shell-body .sidebar:not(.collapsed) .chevron,
-    .shell-body .sidebar:not(.collapsed) .group-body,
-    .shell-body .sidebar:not(.collapsed) .divider {
-      display: none;
-    }
-    .shell-body .sidebar:not(.collapsed) .item {
-      justify-content: center;
-      gap: 0;
-      padding: 11px 0;
-    }
-  }
-
   .group {
     list-style: none;
     margin: 0;
