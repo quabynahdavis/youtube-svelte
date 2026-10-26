@@ -8,4 +8,4 @@
       import { app, type Page } from '../stores';
 */
 
-export { app, type AppStore, type Page } from './stores.svelte';
+export * from './stores.svelte';

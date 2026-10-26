@@ -1,132 +1,264 @@
 <script lang="ts">
   /*
-    Sidebar — stub (scaffold shell). TODO(next step) per Home.png / Sidebar.png:
-      - real icons from /assets/icons/<icon-name>.png (white on transparency)
-      - channel-list "Subscriptions" section fed from CHANNELS
-      - Explorer items (Explore, TV Mode, History, Watch Later, Liked Videos,
-        Playlists) with their panes / collapse chevrons
-      - collapsed 72px rail vs 240px drawer is already wired to the store
+    Sidebar — fixed rail under TopBar. Expanded 239px / collapsed 72px.
+    Groups per mock: Home/Explore/Shorts/TV Mode ‖ History/Watch Later/
+    Liked ‖ Playlists ▾ ‖ Collections ▾ ‖ Subscriptions ▾.
+    Active pill = #272727 radius-10 with a red icon. No-ops stay honest
+    (aria-disabled). Subscriptions group lists the subscribed channels
+    from the catalog collections.
   */
-  import { app, type Page } from '../stores';
+  import Avatar from './Avatar.svelte';
+  import Icon from './Icon.svelte';
+  import { app, type SubsTab } from '../stores';
+  import { getChannel, SUBSCRIBED_CHANNEL_SLUGS } from '../data/catalog';
 
-  interface NavItem {
+  interface Item {
     label: string;
-    page?: Page; //     omitted → placeholder, still TODO
+    icon: string;
+    page?: 'home' | 'shorts';
+    disabled?: boolean;
   }
-  interface NavSection {
-    items: NavItem[];
-    divider?: boolean;
+  interface Group {
+    items: Item[];
+    collapsible?: {
+      key: string;
+      subTab?: SubsTab;
+    };
   }
 
-  const SECTIONS: NavSection[] = [
+  const groups: Group[] = [
     {
       items: [
-        { label: 'Home', page: 'home' },
-        { label: 'Explore' },
-        { label: 'Shorts', page: 'shorts' },
-        { label: 'TV Mode' },
+        { label: 'Home', icon: 'home', page: 'home' },
+        { label: 'Explore', icon: 'explore', disabled: true },
+        { label: 'Shorts', icon: 'shorts', page: 'shorts' },
+        { label: 'TV Mode', icon: 'tv', disabled: true },
       ],
     },
     {
-      divider: true,
-      items: [{ label: 'History' }, { label: 'Watch Later' }, { label: 'Liked Videos' }],
-    },
-    {
-      divider: true,
       items: [
-        { label: 'Playlists' },
-        { label: 'Collections', page: 'collections' },
-        { label: 'Subscriptions', page: 'subscriptions' },
+        { label: 'History', icon: 'history', disabled: true },
+        { label: 'Watch Later', icon: 'clock', disabled: true },
+        { label: 'Liked Videos', icon: 'thumb-up', disabled: true },
       ],
     },
+    { items: [{ label: 'Playlists', icon: 'playlists' }], collapsible: { key: 'playlists' } },
+    { items: [{ label: 'Collections', icon: 'collections' }], collapsible: { key: 'collections', subTab: 'collections' } },
+    { items: [{ label: 'Subscriptions', icon: 'subs' }], collapsible: { key: 'subscriptions', subTab: 'subs' } },
   ];
 
-  const isActive = (item: NavItem): boolean => item.page === app.activePage;
+  let open = $state<Record<string, boolean>>({
+    playlists: false,
+    collections: false,
+    subscriptions: false,
+  });
+
+  const isActive = (item: Item, group: Group): boolean => {
+    const page = app.activePage;
+    if (group.collapsible) {
+      // the three group headers are themselves navigation rows
+      if (group.collapsible.key === 'playlists') return false;
+      return page === 'subscriptions' && app.subsTab === group.collapsible.subTab;
+    }
+    return item.page === page;
+  };
+
+  const onGroupClick = (group: Group): void => {
+    const key = group.collapsible?.key;
+    if (!key) return;
+    if (group.collapsible?.subTab) {
+      app.goToSubs(group.collapsible.subTab);
+      open[key] = true;
+    } else {
+      open[key] = !open[key];
+    }
+  };
+
+  const subscribedChannels = $derived(
+    SUBSCRIBED_CHANNEL_SLUGS.map(getChannel).filter((c): c is NonNullable<typeof c> => !!c),
+  );
 </script>
 
 <nav class="sidebar" class:collapsed={!app.sidebarExpanded} aria-label="Sidebar">
-  {#each SECTIONS as section}
-    {#if section.divider}
-      <hr class="divider" />
-    {/if}
-    <ul>
-      {#each section.items as item}
+  {#each groups as group, gi}
+    {#if gi > 0}<hr class="divider" />{/if}
+    <ul class="group">
+      {#each group.items as item}
         <li>
-          <button
-            class="item"
-            class:active={isActive(item)}
-            disabled={!item.page}
-            onclick={item.page ? () => app.navigateTo(item.page!) : undefined}
-          >
-            <span class="bullet" class:accent={isActive(item)}></span>
+          {#snippet row()}
+            <Icon
+              name={item.icon}
+              class="item-icon {isActive(item, group) ? 'red' : ''}"
+            />
             <span class="label">{item.label}</span>
-          </button>
+            {#if group.collapsible}
+              <span class="chevron" class:down={open[group.collapsible.key]}>
+                <Icon name="chevron-down" size={14} />
+              </span>
+            {/if}
+          {/snippet}
+
+          {#if item.disabled}
+            <button
+              class="item"
+              aria-disabled="true"
+              title="Not wired yet"
+              disabled
+            >
+              {@render row()}
+            </button>
+          {:else if group.collapsible}
+            <button
+              class="item"
+              class:active={isActive(item, group)}
+              onclick={() => onGroupClick(group)}
+              aria-expanded={group.collapsible ? !!open[group.collapsible.key] : undefined}
+            >
+              {@render row()}
+            </button>
+          {:else}
+            <button
+              class="item"
+              class:active={isActive(item, group)}
+              onclick={() => item.page && app.navigateTo(item.page)}
+            >
+              {@render row()}
+            </button>
+          {/if}
         </li>
       {/each}
     </ul>
+
+    {#if group.collapsible && open[group.collapsible.key] && app.sidebarExpanded}
+      {#if group.collapsible.key === 'playlists'}
+        <p class="group-body">No playlists yet</p>
+      {:else if group.collapsible.key === 'collections'}
+        <ul class="group-body group">
+          <li>
+            <button class="item sub" class:active={app.activePage === 'subscriptions' && app.subsTab === 'collections'} onclick={() => app.goToSubs('collections')}>
+              <Icon name="collections" size={16} />
+              <span class="label">All collections</span>
+            </button>
+          </li>
+        </ul>
+      {:else if group.collapsible.key === 'subscriptions'}
+        <ul class="group-body group">
+          {#each subscribedChannels as channel (channel.slug)}
+            <li>
+              <button class="item sub" class:active={app.activeChannel?.slug === channel.slug && app.activePage === 'channel'} onclick={() => app.openChannel(channel.slug)}>
+                <Avatar src={channel.avatar} name={channel.name} size={20} />
+                <span class="label">{channel.name}</span>
+              </button>
+            </li>
+          {/each}
+        </ul>
+      {/if}
+    {/if}
   {/each}
 </nav>
 
 <style>
   .sidebar {
-    width: 240px;
-    padding: var(--yt-space-3) var(--yt-space-3) var(--yt-space-3) 0;
-    transition: width 0.15s ease;
+    position: fixed;
+    top: var(--yt-topbar-h);
+    bottom: 0;
+    left: 0;
+    z-index: var(--yt-z-sidebar);
+    width: var(--yt-sidebar-expanded);
+    padding: var(--yt-space-3) var(--yt-space-3) var(--yt-space-6) 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    background: var(--yt-page);
+    transition: width 0.18s ease;
+  }
+  .sidebar::-webkit-scrollbar {
+    display: none;
   }
   .sidebar.collapsed {
-    width: 72px;
+    width: var(--yt-sidebar-collapsed);
     padding-inline: var(--yt-space-2);
   }
-  hr.divider {
-    margin: var(--yt-space-3) 0;
-    border: 0;
-    border-top: 1px solid var(--yt-border);
-  }
-  ul {
+
+  .group {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: var(--yt-space-1);
+    gap: 2px;
   }
+  .divider {
+    margin: var(--yt-space-3) 0;
+    border: 0;
+    border-top: 1px solid var(--yt-border);
+  }
+
   .item {
     display: flex;
     align-items: center;
     gap: var(--yt-space-4);
     width: 100%;
-    padding: 10px var(--yt-space-4);
+    padding: 9px var(--yt-space-4);
     border-radius: var(--yt-radius-md);
-    color: var(--yt-text-soft);
+    color: var(--yt-text);
     background: none;
-    cursor: pointer;
     text-align: left;
     font-size: var(--yt-fs-md);
     font-weight: var(--yt-weight-medium);
+    line-height: var(--yt-line-normal);
+    white-space: nowrap;
   }
   .item:hover:not(:disabled) {
     background: var(--yt-card);
-    color: var(--yt-text);
   }
   .item.active {
-    background: var(--yt-card);
-    color: var(--yt-text);
-    font-weight: var(--yt-weight-bold);
-  }
-  .item:disabled {
-    cursor: not-allowed;
-    color: var(--yt-text-dim);
-  }
-  .bullet {
-    width: 20px;
-    height: 20px;
-    flex: 0 0 auto;
-    border-radius: var(--yt-radius-xs);
     background: var(--yt-elevated);
   }
-  .bullet.accent {
-    background: var(--yt-accent);
+  .item:disabled {
+    color: var(--yt-text-dim);
+    cursor: not-allowed;
   }
-  .collapsed .label {
+  .item :global(.item-icon.red),
+  .item.active :global(.item-icon) {
+    color: var(--yt-accent);
+  }
+  .sub {
+    gap: var(--yt-space-3);
+    padding-block: 7px;
+    font-weight: var(--yt-weight-regular);
+  }
+
+  .label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .chevron {
+    margin-left: auto;
+    color: var(--yt-text-soft);
+    transition: transform 0.15s ease;
+  }
+  .chevron.down {
+    transform: rotate(180deg);
+  }
+  .group-body {
+    margin: 2px 0 0;
+    padding: 2px 0 6px;
+    color: var(--yt-text-dim);
+    font-size: var(--yt-fs-sm);
+  }
+  ul.group-body {
+    padding-block: 0 6px;
+  }
+
+  .collapsed .label,
+  .collapsed .chevron,
+  .collapsed .group-body,
+  .collapsed .divider {
     display: none;
+  }
+  .collapsed .item {
+    justify-content: center;
+    gap: 0;
+    padding: 11px 0;
   }
 </style>
