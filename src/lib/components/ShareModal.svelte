@@ -23,7 +23,7 @@
     { key: 'bluesky', color: '#00A0DF' }
   ];
 
-  let copyState = '';
+  let copyState = $state('');
   const SHARE_URL = 'https://youtu.be/dQw4w9WgXcQ';
 
   const enjoyers = CHANNELS.filter(c => c.slug.endsWith('enjoyer'));
@@ -85,7 +85,7 @@
     <div class="section">Send to mutual subscribers</div>
     <ul class="contacts">
       {#each enjoyers as enjoyer}
-        <li class="contact" onclick={() => sendTo(enjoyer.slug)}>
+        <button class="contact" onclick={() => sendTo(enjoyer.slug)}>
           <span class="avatar">
             <span style="font-size:12px;color:var(--yt-text-soft);">{enjoyer.name[0]}</span>
           </span>
@@ -96,7 +96,7 @@
           {#if sentId === enjoyer.slug}
             <span class="sent">✓ Sent</span>
           {/if}
-        </li>
+        </button>
       {/each}
     </ul>
 

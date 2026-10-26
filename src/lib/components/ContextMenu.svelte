@@ -117,7 +117,7 @@
   }
 </style>
 
-<script lang="ts" context="module">
+<script lang="ts" module>
   /**
    * Card context-menu items for VideoCard / ShortsCard.
    * Used by App (via app.runContextAction) which handles:

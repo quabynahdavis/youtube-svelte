@@ -14,12 +14,13 @@
     - Close on scrim/backdrop, ✕ button, Esc key
   */
   import { app } from '../stores';
-  import { CHIPS, DEFAULT_EXCLUDED } from '../data/catalog';
+  import { CHIPS } from '../data/catalog';
+  import { DEFAULT_EXCLUDED } from '../stores';
   import Icon from './Icon.svelte';
 
   // ---------- state ----------
-  let tagSearch = '';
-  let excludedSearch = '';
+  let tagSearch = $state('');
+  let excludedSearch = $state('');
 
   // ---------- helpers ----------
   // Compute filtered tags for the two sections
@@ -27,7 +28,7 @@
     CHIPS.filter(chip => chip !== 'All' && chip.toLowerCase().includes(tagSearch.toLowerCase()))
   );
   const filteredExcluded = $derived(
-    DEFAULT_EXCLUDED.filter(chip => chip.toLowerCase().includes(excludedSearch.toLowerCase()))
+    DEFAULT_EXCLUDED.filter((chip: string) => chip.toLowerCase().includes(excludedSearch.toLowerCase()))
   );
 
   // Enter handling for tag search boxes
@@ -109,7 +110,7 @@
       <section class="section" id="kept">
         <h3>Selected / kept</h3>
         <div class="kept-chips">
-          {#each $app.personalize.active as tag}
+          {#each app.personalize.active as tag}
             <div class="kept-chip pill">
               ✓ {tag}
               <button
