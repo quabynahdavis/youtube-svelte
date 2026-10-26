@@ -1,49 +1,119 @@
 <script lang="ts">
   /*
-    ShortsCard — vertical short for the Shorts shelves, per Shorts.png /
-    Shorts-1.png. TODO(next step):
-      - 9:16 <img src={video.thumb}> from /assets/shorts/*.png
-      - overlay gradient + playback affordances, likes/comments columns
-      - share action → app.shareOpen = true
+    ShortsCard — 9:16 short card: thumb, always-visible ⋮ (mock), title
+    (max 2 lines), channel, views · age. Menus go through the shared
+    ContextMenu portal.
   */
-  import type { Video } from '../data/catalog';
-  import { getChannel } from '../data/catalog';
+  import Icon from './Icon.svelte';
+  import { app } from '../stores';
+  import { formatCount, getChannel, type Video } from '../data/catalog';
 
-  let { video }: { video: Video } = $props();
+  interface Props {
+    video: Video;
+  }
+
+  let { video }: Props = $props();
 
   const channel = $derived(getChannel(video.channel));
+  let thumbError = $state(false);
+
+  const openMenu = (e: Event): void => {
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    app.openContextMenu(video, rect.right + 4, rect.bottom + 4);
+  };
 </script>
 
-<article class="shorts-card">
-  <div class="thumb"></div>
+<article class="short">
+  <div class="thumbwrap">
+    <button
+      class="thumb"
+      class:fallback={thumbError}
+      aria-label="Open channel {channel?.name ?? video.channel}"
+      onclick={() => app.openChannel(video.channel)}
+    >
+      {#if !thumbError}
+        <img
+          src={video.thumb}
+          alt={video.title}
+          loading="lazy"
+          onerror={() => (thumbError = true)}
+        />
+      {/if}
+    </button>
+    <button class="kebab" data-context-scope onclick={openMenu} aria-label="Action menu for {video.title}">
+      <Icon name="more-vert" size={15} />
+    </button>
+  </div>
+
   <h3 class="title">{video.title}</h3>
-  <div class="stats">{channel?.name ?? video.channel} · {video.views} views</div>
+  <div class="who">{channel?.name ?? video.channel}</div>
+  <div class="stats">{formatCount(video.views)} views · {video.age}</div>
 </article>
 
 <style>
-  .shorts-card {
-    width: 200px;
+  .short {
+    grid-column: 1;
     cursor: pointer;
   }
-  .thumb {
-    aspect-ratio: 9/16;
-    border-radius: var(--yt-radius-lg);
-    background: var(--yt-card);
+  .thumbwrap {
+    position: relative;
   }
+  .thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    border-radius: var(--yt-radius-xl);
+    background: var(--yt-raised);
+    overflow: hidden;
+    padding: 0;
+  }
+  .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .thumb:hover img {
+    filter: brightness(1.05);
+  }
+  .kebab {
+    position: absolute;
+    top: var(--yt-space-2);
+    right: var(--yt-space-2);
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--yt-radius-pill);
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+  }
+  .kebab:hover {
+    background: rgba(0, 0, 0, 0.78);
+  }
+
   .title {
     margin: var(--yt-space-2) 0 0;
-    font-size: var(--yt-fs-md);
-    font-weight: var(--yt-weight-bold);
+    font-size: var(--yt-fs-lg);
+    font-weight: var(--yt-weight-semibold);
     line-height: var(--yt-line-snug);
+    color: var(--yt-text);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .stats {
-    margin-top: 2px;
-    font-size: var(--yt-fs-xs);
+  .who {
+    margin-top: 3px;
     color: var(--yt-text-soft);
+    font-size: var(--yt-fs-sm);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .stats {
+    margin-top: 1px;
+    color: var(--yt-text-soft);
+    font-size: var(--yt-fs-sm);
   }
 </style>

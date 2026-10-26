@@ -1,25 +1,76 @@
 <script lang="ts">
   /*
-    ContextMenu — right-click / ⋮ overflow menu, per "Context Menu*.png" and
-    "Video Options*.png". TODO(next step):
-      - items with icons from /assets/icons/*.png (white on transparency)
-      - submenu ("Save to playlist", quality options per "Quality Options.png")
-      - viewport-clamping positioning + outside-click/Escape closing
+    ContextMenu — reusable portal-style menu: card ⋮ menus (App) AND
+    small toolbar dropdowns (Subscriptions page). Fixed at {x, y},
+    clamped into the viewport, closed by outside click / Esc / scroll.
   */
+  import Icon from './Icon.svelte';
+
+  export interface MenuItem {
+    id: string;
+    label: string;
+    icon?: string;
+    /** full-width divider rendered above the item */
+    divider?: boolean;
+  }
+
   interface Props {
     x: number;
     y: number;
-    items: string[];
-    onPick?: (item: string) => void;
+    items: MenuItem[];
+    onPick?: (id: string) => void;
+    onDismiss?: () => void;
   }
 
-  let { x, y, items, onPick }: Props = $props();
+  let { x, y, items, onPick, onDismiss }: Props = $props();
+
+  let menuEl = $state<HTMLElement>();
+
+  const width = 220;
+  const rowHeight = 40;
+  const pad = 8;
+
+  const left = $derived.by(() => {
+    const maxX = (typeof window !== 'undefined' ? window.innerWidth : 1280) - width - 8;
+    return Math.max(8, Math.min(x, maxX));
+  });
+  const top = $derived.by(() => {
+    const est = items.length * rowHeight + pad;
+    const maxY = (typeof window !== 'undefined' ? window.innerHeight : 800) - est - 12;
+    return Math.max(8, Math.min(y, maxY));
+  });
+
+  const isOutside = (target: EventTarget | null): boolean => {
+    if (!(target instanceof Element)) return true;
+    if (menuEl?.contains(target)) return false;
+    return !target.closest('[data-context-scope]');
+  };
+
+  const handleOutside = (e: PointerEvent): void => {
+    if (isOutside(e.target)) onDismiss?.();
+  };
+
+  $effect(() => {
+    const close = () => onDismiss?.();
+    document.addEventListener('scroll', close, { capture: true, passive: true });
+    return () => document.removeEventListener('scroll', close, { capture: true });
+  });
 </script>
 
-<menu class="context-menu" style:top="{y}px" style:left="{x}px">
-  {#each items as item}
+<svelte:window onpointerdown={handleOutside} onkeydown={(e) => e.key === 'Escape' && onDismiss?.()} />
+
+<menu class="context-menu" bind:this={menuEl} style:left="{left}px" style:top="{top}px" role="menu">
+  {#each items as item (item.id)}
+    {#if item.divider}
+      <hr />
+    {/if}
     <li>
-      <button class="entry" onclick={() => onPick?.(item)}>{item}</button>
+      <button role="menuitem" onclick={() => { onPick?.(item.id); }}>
+        {#if item.icon}
+          <span class="glyph"><Icon name={item.icon} size={18} /></span>
+        {/if}
+        {item.label}
+      </button>
     </li>
   {/each}
 </menu>
@@ -28,17 +79,24 @@
   .context-menu {
     position: fixed;
     z-index: var(--yt-z-context);
-    min-width: 200px;
+    width: 220px;
     margin: 0;
-    padding: var(--yt-space-2);
+    padding: var(--yt-space-1);
     list-style: none;
-    border: 1px solid var(--yt-border);
-    border-radius: var(--yt-radius-md);
-    background: var(--yt-elevated);
+    border: 1px solid var(--yt-menu-border);
+    border-radius: var(--yt-radius-lg);
+    background: var(--yt-card);
     box-shadow: var(--yt-shadow-modal);
   }
-  .entry {
-    display: block;
+  hr {
+    margin: var(--yt-space-1) var(--yt-space-2);
+    border: 0;
+    border-top: 1px solid var(--yt-border);
+  }
+  li button {
+    display: flex;
+    align-items: center;
+    gap: var(--yt-space-3);
     width: 100%;
     padding: 10px var(--yt-space-3);
     border-radius: var(--yt-radius-sm);
@@ -46,8 +104,15 @@
     color: var(--yt-text);
     text-align: left;
     font-size: var(--yt-fs-md);
+    line-height: var(--yt-line-normal);
   }
-  .entry:hover {
-    background: var(--yt-card);
+  li button:hover {
+    background: var(--yt-elevated);
+  }
+  .glyph {
+    display: grid;
+    place-items: center;
+    width: 20px;
+    color: var(--yt-text-soft);
   }
 </style>
