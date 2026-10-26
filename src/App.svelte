@@ -49,16 +49,26 @@
     display: flex;
     flex-direction: column;
     height: 100dvh;
+    /* Never let the app shell grow wider than the viewport; contained
+       scrollers (shelf, chip row) are allowed to scroll internally. */
+    overflow-x: hidden;
   }
   .shell-body {
     display: flex;
     flex: 1;
     min-height: 0;
+    overflow-x: hidden;
   }
   .content {
-    flex: 1;
+    flex: 1 1 0;
     min-width: 0;
+    /* Cap the feed width so child grids/shelves can never force a
+       horizontal scrollbar. Centered on ultra-wide screens. */
+    max-width: var(--yt-content-max);
+    margin-inline: auto;
+    width: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: var(--yt-space-2) var(--yt-space-6) var(--yt-space-10);
   }
 </style>

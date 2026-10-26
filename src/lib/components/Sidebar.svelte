@@ -159,11 +159,10 @@
 
 <style>
   .sidebar {
-    position: fixed;
+    position: sticky;
     top: var(--yt-topbar-h);
-    bottom: 0;
-    left: 0;
-    z-index: var(--yt-z-sidebar);
+    align-self: flex-start;
+    height: calc(100dvh - var(--yt-topbar-h));
     width: var(--yt-sidebar-expanded);
     padding: var(--yt-space-3) var(--yt-space-3) var(--yt-space-6) 0;
     overflow-y: auto;
@@ -178,6 +177,53 @@
   .sidebar.collapsed {
     width: var(--yt-sidebar-collapsed);
     padding-inline: var(--yt-space-2);
+  }
+
+  /*
+    Narrow-baseline guard: when the viewport can't fit the expanded rail
+    alongside a readable feed, pin the sidebar to its collapsed 72px rail
+    regardless of the app.sidebarExpanded flag. This prevents the sticky
+    sidebar from covering the feed and stops horizontal overflow.
+  */
+  @media (max-width: 768px) {
+    .sidebar:not(.collapsed) {
+      width: var(--yt-sidebar-collapsed);
+      padding-inline: var(--yt-space-2);
+    }
+    .sidebar:not(.collapsed) .label,
+    .sidebar:not(.collapsed) .chevron,
+    .sidebar:not(.collapsed) .group-body,
+    .sidebar:not(.collapsed) .divider {
+      display: none;
+    }
+    .sidebar:not(.collapsed) .item {
+      justify-content: center;
+      gap: 0;
+      padding: 11px 0;
+    }
+  }
+
+  /*
+    Tablet breakpoint: keep the expanded rail only when there's room for
+    the feed to stay >= 360px wide. Otherwise force the collapsed rail so
+    the sticky sidebar never straddles over page content.
+  */
+  @media (min-width: 769px) and (max-width: 1099px) {
+    .shell-body .sidebar:not(.collapsed) {
+      width: var(--yt-sidebar-collapsed);
+      padding-inline: var(--yt-space-2);
+    }
+    .shell-body .sidebar:not(.collapsed) .label,
+    .shell-body .sidebar:not(.collapsed) .chevron,
+    .shell-body .sidebar:not(.collapsed) .group-body,
+    .shell-body .sidebar:not(.collapsed) .divider {
+      display: none;
+    }
+    .shell-body .sidebar:not(.collapsed) .item {
+      justify-content: center;
+      gap: 0;
+      padding: 11px 0;
+    }
   }
 
   .group {
