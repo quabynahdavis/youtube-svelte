@@ -1,4 +1,5 @@
 import { mount } from 'svelte'
+import '@fontsource-variable/figtree' // wght 300–900 variable; 400–900 in use
 import './app.css'
 import App from './App.svelte'
 
