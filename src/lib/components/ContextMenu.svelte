@@ -116,3 +116,24 @@
     color: var(--yt-text-soft);
   }
 </style>
+
+<script lang="ts" context="module">
+  /**
+   * Card context-menu items for VideoCard / ShortsCard.
+   * Used by App (via app.runContextAction) which handles:
+   * - share → opens ShareModal
+   * - not-interested → hides video
+   * - dont-recommend → hides channel
+   * - add-to-queue / watch-later / add-to-playlist / report → no-ops (v1)
+   */
+  export const CARD_MENU_ITEMS: MenuItem[] = [
+    { id: 'add-to-queue', label: 'Add to queue', icon: 'queue' },
+    { id: 'watch-later', label: 'Watch later', icon: 'bookmark' },
+    { id: 'add-to-playlist', label: 'Add to playlist', icon: 'plus' },
+    { id: 'share', label: 'Share', icon: 'share' },
+    { id: 'divider-1', label: '', divider: true },
+    { id: 'not-interested', label: 'Not interested', icon: 'minus-circle' },
+    { id: 'dont-recommend', label: 'Don\'t recommend channel', icon: 'ban' },
+    { id: 'report', label: 'Report', icon: 'flag' },
+  ];
+</script>
