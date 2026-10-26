@@ -39,7 +39,7 @@
       {#each PREFERENCES as pref}
         <li class="pref">
           <span class="name">{pref}</span>
-          <span class="switch" class:on={pref === app.activeChip}></span>
+          <span class="switch" class:on={app.personalize.active.includes(pref)}></span>
         </li>
       {/each}
     </ul>

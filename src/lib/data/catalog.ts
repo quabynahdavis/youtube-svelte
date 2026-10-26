@@ -259,3 +259,7 @@ export const getChannelVideos = (slug: string): Video[] =>
 /** Videos of a set of channels (used by the Subscriptions timeline). */
 export const getChannelSetVideos = (slugs: readonly string[]): Video[] =>
   VIDEOS.filter((v) => slugs.includes(v.channel));
+
+/** Videos tagged with a collection's "Plays In" value (used by Collections page). */
+export const getCollectionVideos = (collection: string): Video[] =>
+  VIDEOS.filter((v) => v.playsIn === collection);

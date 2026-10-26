@@ -113,4 +113,9 @@
   --yt-z-panel:   200;   /* notifs popover, side panels */
   --yt-z-modal:   300;   /* share / personalize dialogs */
   --yt-z-context: 400;   /* context menus on top of all */
+
+  /* ----------------------------- Collection gradients ---------------- */
+  --yt-collection-gaming:        linear-gradient(135deg, #6b46c1 0%, #4c1d95 100%);
+  --yt-collection-design-code:   linear-gradient(135deg, #0f766e 0%, #064e3b 100%);
+  --yt-collection-tech:          linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
 }
