@@ -75,6 +75,27 @@
   .thumb:hover img {
     filter: brightness(1.05);
   }
+  /* Visible placeholder when the thumbnail fails to load */
+  .thumb.fallback {
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--yt-elevated), var(--yt-border));
+    color: var(--yt-text-dim);
+    text-align: center;
+  }
+  .thumb.fallback::before {
+    content: "🖼";
+    font-size: 34px;
+    line-height: 1;
+    display: block;
+    margin-bottom: var(--yt-space-1);
+  }
+  .thumb.fallback::after {
+    content: "No thumbnail";
+    display: block;
+    font-size: var(--yt-fs-xs);
+    letter-spacing: 0.04em;
+  }
   .kebab {
     position: absolute;
     top: var(--yt-space-2);

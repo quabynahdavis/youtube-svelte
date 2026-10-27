@@ -24,10 +24,22 @@
   ];
 
   let copyState = $state('');
+  let logoError = $state(false);
   const SHARE_URL = 'https://youtu.be/dQw4w9WgXcQ';
 
   const enjoyers = CHANNELS.filter(c => c.slug.endsWith('enjoyer'));
   let sentId = $state<string | null>(null);
+
+  // timeout ids so transient copy/sent states can be cleared on destroy
+  let copyTimer: ReturnType<typeof setTimeout> | null = null;
+  let sentTimer: ReturnType<typeof setTimeout> | null = null;
+
+  $effect(() => {
+    return () => {
+      if (copyTimer) clearTimeout(copyTimer);
+      if (sentTimer) clearTimeout(sentTimer);
+    };
+  });
 
   let comment = $state('');
   let commentInputDisabled = $derived(comment.trim().length === 0);
@@ -36,7 +48,11 @@
     try {
       await navigator.clipboard.writeText(SHARE_URL);
       copyState = 'copied';
-      setTimeout(() => (copyState = ''), 1500);
+      if (copyTimer) clearTimeout(copyTimer);
+      copyTimer = setTimeout(() => {
+        copyState = '';
+        copyTimer = null;
+      }, 1500);
     } catch (e) {
       console.error(e);
     }
@@ -44,7 +60,11 @@
 
   function sendTo(enjoyerId: string) {
     sentId = enjoyerId;
-    setTimeout(() => (sentId = null), 1500);
+    if (sentTimer) clearTimeout(sentTimer);
+    sentTimer = setTimeout(() => {
+      sentId = null;
+      sentTimer = null;
+    }, 1500);
   }
 </script>
 
@@ -101,7 +121,9 @@
     </ul>
 
     <div class="comment">
-      <img class="logo" src={BRAND_LOGO} alt="YouTube logo" />
+      {#if !logoError}
+        <img class="logo" src={BRAND_LOGO} alt="YouTube logo" onerror={() => (logoError = true)} />
+      {/if}
       <input placeholder="Add a comment…" bind:value={comment} disabled={commentInputDisabled} />
     </div>
 

@@ -39,7 +39,13 @@
     Sparkle,
     Fire,
     Share,
-    Folder
+    Folder,
+    WhatsappLogo,
+    FacebookLogo,
+    XLogo,
+    EnvelopeSimple,
+    RedditLogo,
+    PinterestLogo
   } from 'phosphor-svelte';
 
   interface Props {
@@ -87,7 +93,14 @@
     sparkles: Sparkle,
     flame: Fire,
     share: Share,
-    folder: Folder
+    folder: Folder,
+    whatsapp: WhatsappLogo,
+    facebook: FacebookLogo,
+    x: XLogo,
+    email: EnvelopeSimple,
+    reddit: RedditLogo,
+    pinterest: PinterestLogo,
+    bluesky: Share
   };
 
   const SelectedIcon = $derived(iconMap[name] || House);
