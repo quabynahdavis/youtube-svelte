@@ -34,7 +34,7 @@
       });
     }
 
-    pool = pool.filter((v) => !isExcludedBy(v, app.personalize.excluded));
+    pool = pool.filter((v) => !isExcludedBy(v, app.personalize.excluded, { includeShortsType: true }));
     pool = pool.filter((v) => !app.hidden.includes(v.slug) && !app.hiddenChannels.includes(v.channel));
 
     return pool;

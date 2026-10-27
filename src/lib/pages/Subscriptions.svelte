@@ -210,7 +210,7 @@
         <p>No subscriptions match your filters</p>
         <button class="reset" onclick={() => { subsSearch = ''; app.subsKind = 'all'; }}>Reset filters</button>
       </div>
-    {:else if isShortsKind || app.subsView === 'timeline' && isShortsKind}
+    {:else if isShortsKind}
       <section class="shorts-grid">
         {#each timelinePool as video (video.slug)}
           <ShortsCard {video} />
@@ -310,8 +310,8 @@
               <Icon name="pencil" size={15} />
             </button>
             <span class="spacer"></span>
-            <button class="tool small" tabindex={-1}><Icon name="plus" size={14} /> Add channel</button>
-            <button class="tool small" tabindex={-1}>View Collection</button>
+            <button class="tool small" tabindex={-1} disabled title="Add channel to this collection (coming soon)"><Icon name="plus" size={14} /> Add channel</button>
+            <button class="tool small" tabindex={-1} disabled title="Open this collection's dedicated page (coming soon)">View Collection</button>
             <button
               class="chev"
               aria-label="Collapse {group.name}"

@@ -126,7 +126,7 @@
    * - dont-recommend → hides channel
    * - add-to-queue / watch-later / add-to-playlist / report → no-ops (v1)
    */
-  export const CARD_MENU_ITEMS: MenuItem[] = [
+  export const CARD_MENU_ITEMS = [
     { id: 'add-to-queue', label: 'Add to queue', icon: 'queue' },
     { id: 'watch-later', label: 'Watch later', icon: 'bookmark' },
     { id: 'add-to-playlist', label: 'Add to playlist', icon: 'plus' },

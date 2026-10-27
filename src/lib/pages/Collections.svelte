@@ -21,7 +21,7 @@
   {#each COLLECTIONS as collection}
     <section class="collection">
       <header class="hero">
-        <div class="cover" style="background: var(--yt-collection-{collection.toLowerCase().replace(/[^a-z]/g, '')})"></div>
+        <div class="cover" style="background: var(--yt-collection-{collection.toLowerCase().replace(/[^a-z0-9]+/g, '-')})"></div>
         <div class="hero-body">
           <h1>{collection}</h1>
           <p class="meta">
