@@ -13,7 +13,7 @@
   import Subscriptions from './lib/pages/Subscriptions.svelte';
   import Collections from './lib/pages/Collections.svelte';
   import ChannelPage from './lib/pages/ChannelPage.svelte';
-  import { Router, Route } from 'svelte-routing';
+  import { Router, Route } from './lib/router';
   import { app } from './lib/stores';
 </script>
 

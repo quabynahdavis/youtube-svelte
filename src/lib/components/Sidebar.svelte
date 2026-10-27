@@ -10,7 +10,7 @@
   */
   import Avatar from './Avatar.svelte';
   import Icon from './Icon.svelte';
-  import { link } from 'svelte-routing';
+  import { link } from '../router';
   import { app, type SubsTab } from '../stores';
   import { getChannel, SUBSCRIBED_CHANNEL_SLUGS } from '../data/catalog';
 

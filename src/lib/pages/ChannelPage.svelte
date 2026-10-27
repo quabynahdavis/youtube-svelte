@@ -13,25 +13,29 @@
   import Icon from '../components/Icon.svelte';
   import VideoCard from '../components/VideoCard.svelte';
   import ShortsCard from '../components/ShortsCard.svelte';
-  import { app } from '../stores';
+  import { app, type ChannelTab } from '../stores';
   import { getChannel, getChannelVideos, formatCount, type Video } from '../data/catalog';
 
-  let slug = $state('juxtoppassed');
+  interface Props {
+    params: { slug?: string };
+  }
 
+  let { params }: Props = $props();
+
+  const slug = $derived(params.slug ?? 'juxtoppassed');
   const channel = $derived(getChannel(slug) ?? getChannel('juxtoppassed')!);
-  const videos = $derived(getChannelVideos(channel.slug).filter((v) => v.type === 'video'));
-  const shorts = $derived(getChannelVideos(channel.slug).filter((v) => v.type === 'short'));
+  const videos = $derived(getChannelVideos(slug));
+  const shorts = $derived(videos.filter((v) => v.type === 'short'));
 
   $effect(() => {
     // sync store when params change (for sidebar active state, etc.)
-    app.activeChannel = channel;
+    if (channel) app.activeChannel = channel;
   });
 
-  const CHANNEL_TABS: Array<{ id: string; label: string }> = [
+  const CHANNEL_TABS: Array<{ id: ChannelTab; label: string }> = [
     { id: 'home', label: 'Home' },
     { id: 'videos', label: 'Videos' },
     { id: 'shorts', label: 'Shorts' },
-    { id: 'live', label: 'Live' },
     { id: 'posts', label: 'Posts' },
     { id: 'playlists', label: 'Playlists' },
     { id: 'channels', label: 'Channels' },
@@ -61,11 +65,7 @@
   }
 </script>
 
-<slot let:params>
-  {#snippet renderPage(params: { slug?: string })}
-    {#if params.slug !== undefined}
-      {slug = params.slug}
-    {/if}
+  {#snippet renderPage()}
     <div class="channel-page">
       <div class="banner-wrap">
         {#if channel.banner}
@@ -106,7 +106,7 @@
           <button
             class="tab"
             class:active={app.channelTab === tab.id}
-            onclick={() => (app.channelTab = tab.id as any)}
+            onclick={() => (app.channelTab = tab.id)}
           >
             {tab.label}
           </button>
@@ -169,8 +169,7 @@
     </div>
   {/snippet}
 
-  {@render renderPage(params)}
-</slot>
+  {@render renderPage()}
 
 <style>
   .channel-page {
