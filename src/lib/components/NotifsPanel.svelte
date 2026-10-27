@@ -14,7 +14,7 @@
     return ch?.avatar ?? '/assets/avatars/default.png';
   }
   function markAllRead() {
-    seen.clear();
+    NOTIFICATIONS.forEach(n => seen.add(n.id));
   }
 </script>
 
@@ -31,7 +31,7 @@
     {#each NOTIFICATIONS as n (n.id)}
       {#if n.type === 'shared'}
         {#if !seen.has(n.id)}
-          <li class="shared-row" onclick={() => toggleSeen(n.id)}>
+          <button type="button" class="shared-row" onclick={() => toggleSeen(n.id)}>
             <Avatar src={avatarFor(n.channelSlug)} size={64} />
             <div class="lines">
               <p class="text">↗ {n.channelSlug} shared with you:</p>
@@ -40,8 +40,8 @@
                   <p class="title">{n.title ?? 'New video'}</p>
                   <p class="channel">{n.channelSlug}</p>
                   <div class="pills">
-                    <button class="pill">Watch later</button>
-                    <button class="pill">Share</button>
+                    <span class="pill">Watch later</span>
+                    <span class="pill">Share</span>
                   </div>
                 </div>
                 <div class="inner-right">
@@ -49,27 +49,27 @@
                 </div>
               </div>
             </div>
-            <button class="kebab" aria-label="More options" onclick={(e) => e.stopPropagation()}><Icon name="more-vert" size={15} /></button>
-          </li>
+            <span class="kebab" role="button" tabindex="0" aria-label="More options" onclick={(e) => e.stopPropagation()} onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && e.stopPropagation()}><Icon name="more-vert" size={15} /></span>
+          </button>
         {:else}
-          <li class="shared-row seen" onclick={() => toggleSeen(n.id)}>
+          <button type="button" class="shared-row seen" onclick={() => toggleSeen(n.id)}>
             <Avatar src={avatarFor(n.channelSlug)} size={40} />
             <div class="lines">
               <p class="text dim">{n.channelSlug} shared with you:</p>
               <p class="text dim age">{n.age}</p>
             </div>
-            <button class="kebab" aria-label="More options" onclick={(e) => e.stopPropagation()}><Icon name="more-vert" size={15} /></button>
-          </li>
+            <span class="kebab" role="button" tabindex="0" aria-label="More options" onclick={(e) => e.stopPropagation()} onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && e.stopPropagation()}><Icon name="more-vert" size={15} /></span>
+          </button>
         {/if}
       {:else}
-        <li class="row" onclick={() => toggleSeen(n.id)}>
+        <button type="button" class="row" onclick={() => toggleSeen(n.id)}>
           <Avatar src={avatarFor(n.channelSlug)} size={40} />
           <div class="lines">
             <p class="text">{n.channelSlug} uploaded: <strong>{n.title ?? n.channelSlug}</strong></p>
             <span class="age">{n.age}</span>
           </div>
-          <button class="kebab" aria-label="More options" onclick={(e) => e.stopPropagation()}><Icon name="more-vert" size={15} /></button>
-        </li>
+          <span class="kebab" role="button" tabindex="0" aria-label="More options" onclick={(e) => e.stopPropagation()} onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && e.stopPropagation()}><Icon name="more-vert" size={15} /></span>
+        </button>
       {/if}
     {/each}
   </ul>
@@ -93,10 +93,10 @@ h2 { margin:0; font-size:var(--yt-fs-2xl); font-weight:var(--yt-weight-black); }
 .row:hover, .shared-row:hover { background:var(--yt-elevated); }
 .kebab { align-self:center; margin-left:auto; margin-right:4px; padding:4px; }
 .kebab:hover { background:var(--yt-elevated); border-radius:var(--yt-radius-pill); }
-.inner-card { display:flex; justify-content:space-between; gap:var(--yt-space-3); background:#212121; border-radius:var(--yt-radius-lg); padding:var(--yt-space-2); margin-top:var(--yt-space-2); }
+.inner-card { display:flex; justify-content:space-between; gap:var(--yt-space-3); background: var(--yt-raised); border-radius:var(--yt-radius-lg); padding:var(--yt-space-2); margin-top:var(--yt-space-2); }
 .inner-left { flex:2; min-width:0; }
-.inner-left .title { margin:0; color:#fff; font-size:var(--yt-fs-md); font-weight:var(--yt-weight-semibold); line-height:var(--yt-line-snug); }
-.inner-left .channel { margin:3px 0 0; color:#aaa; font-size:var(--yt-fs-xs); }
+.inner-left .title { margin:0; color: var(--yt-text); font-size:var(--yt-fs-md); font-weight:var(--yt-weight-semibold); line-height:var(--yt-line-snug); }
+.inner-left .channel { margin:3px 0 0; color: var(--yt-text-soft); font-size:var(--yt-fs-xs); }
 .inner-left .pills { display:flex; gap:var(--yt-space-2); margin-top:var(--yt-space-2); }
 .inner-left .pill { background:var(--yt-elevated); color:var(--yt-text); font-size:var(--yt-fs-xs); font-weight:var(--yt-weight-medium); padding:var(--yt-space-1) var(--yt-space-3); border-radius:var(--yt-radius-pill); }
 .inner-right { flex:1; text-align:right; overflow:hidden; }

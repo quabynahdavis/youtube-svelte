@@ -93,7 +93,7 @@
           class="search-input"
         />
         <div class="chips">
-          {#each filteredTags as tag}
+          {#each filteredTags as tag (tag)}
             <button
               class="chip"
               onclick={() => removeOwnTag(tag)}
@@ -110,7 +110,7 @@
       <section class="section" id="kept">
         <h3>Selected / kept</h3>
         <div class="kept-chips">
-          {#each app.personalize.active as tag}
+          {#each app.personalize.active as tag (tag)}
             <div class="kept-chip pill">
               ✓ {tag}
               <button
@@ -133,7 +133,7 @@
           class="search-input"
         />
         <div class="chips excluded">
-          {#each DEFAULT_EXCLUDED as tag}
+          {#each app.personalize.excluded as tag (tag)}
             <button
               class="chip"
               onclick={() => removeExcludedTag(tag)}
@@ -238,11 +238,6 @@
   .chip:hover {
     background: var(--yt-hover);
   }
-  .remove-icon {
-    width: 12px;
-    height: 12px;
-    stroke: var(--yt-text-dim);
-  }
   .kept-chips {
     display: flex;
     flex-wrap: wrap;
@@ -271,29 +266,9 @@
   .kept-chip .remove-kept:hover {
     color: var(--yt-text);
   }
-  .excluded-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--yt-space-3);
-    margin-top: var(--yt-space-1);
-  }
-  .excluded-chip {
-    display: flex;
-    align-items: center;
-    gap: var(--yt-space-2);
-    padding: var(--yt-space-1) var(--yt-space-2);
-    border-radius: var(--yt-radius-md);
-    background: var(--yt-chip-bg);
-    color: var(--yt-text);
-    font-size: var(--yt-fs-sm);
-    cursor: pointer;
-  }
-  .excluded-chip:hover {
-    background: var(--yt-hover);
-  }
   .modal-foot {
     margin-top: var(--yt-space-6);
-    text-align: flex-end;
+    text-align: right;
   }
   .apply {
     padding: 10px var(--yt-space-6);
