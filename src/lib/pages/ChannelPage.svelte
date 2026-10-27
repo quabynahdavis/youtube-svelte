@@ -7,6 +7,7 @@
     - Home tab: "In Case You Missed" shelf + community post + Popular videos grid
     - Shorts tab: shorts grid
     - Other tabs: placeholder for now
+    Reads slug from route params via svelte-routing.
   */
   import Avatar from '../components/Avatar.svelte';
   import Icon from '../components/Icon.svelte';
@@ -15,9 +16,16 @@
   import { app } from '../stores';
   import { getChannel, getChannelVideos, formatCount, type Video } from '../data/catalog';
 
-  const channel = $derived(app.activeChannel ?? getChannel('juxtoppassed')!);
+  let slug = $state('juxtoppassed');
+
+  const channel = $derived(getChannel(slug) ?? getChannel('juxtoppassed')!);
   const videos = $derived(getChannelVideos(channel.slug).filter((v) => v.type === 'video'));
   const shorts = $derived(getChannelVideos(channel.slug).filter((v) => v.type === 'short'));
+
+  $effect(() => {
+    // sync store when params change (for sidebar active state, etc.)
+    app.activeChannel = channel;
+  });
 
   const CHANNEL_TABS: Array<{ id: string; label: string }> = [
     { id: 'home', label: 'Home' },
@@ -53,448 +61,305 @@
   }
 </script>
 
-<div class="channel-page">
-  <div class="banner-wrap">
-    {#if channel.banner}
-      <img class="banner" src={channel.banner} alt="" loading="eager" onerror={onBannerError} />
-    {:else}
-      <div class="banner-fallback"></div>
+<slot let:params>
+  {#snippet renderPage(params: { slug?: string })}
+    {#if params.slug !== undefined}
+      {slug = params.slug}
     {/if}
-  </div>
-
-  <header class="identity">
-    <Avatar src={channel.avatar} name={channel.name} size={120} ring />
-    <div class="who">
-      <h1>
-        {channel.name}
-        {#if channel.verified}
-          <span class="check" aria-label="Verified"><Icon name="check-circle" size={22} /></span>
-        {/if}
-      </h1>
-      <p class="stats">{formatCount(channel.subs)} subscribers · {videos.length} videos</p>
-      <p class="blurb">Design & UI/UX experiments. Subscribe for more cats (and design content, of course). <span class="more">...more</span></p>
-    </div>
-    <div class="actions">
-      <button class="bell-btn" aria-label="Notifications" title="All notifications">
-        <Icon name="bell" size={20} />
-      </button>
-      <button class="subscribe" aria-pressed={app.isSubscribed(channel.slug)} onclick={() => app.toggleSubscribed(channel.slug)}>
-        {#if app.isSubscribed(channel.slug)}
-          <Icon name="bell" size={16} /> Subscribed
+    <div class="channel-page">
+      <div class="banner-wrap">
+        {#if channel.banner}
+          <img class="banner" src={channel.banner} alt="" loading="eager" onerror={onBannerError} />
         {:else}
-          Subscribe
+          <div class="banner-fallback"></div>
         {/if}
-      </button>
-    </div>
-  </header>
+      </div>
 
-  <nav class="tabs" aria-label="Channel sections">
-    {#each CHANNEL_TABS as tab}
-      <button
-        class="tab"
-        class:active={app.channelTab === tab.id}
-        onclick={() => (app.channelTab = tab.id as any)}
-      >
-        {tab.label}
-      </button>
-    {/each}
-  </nav>
+      <header class="identity">
+        <Avatar src={channel.avatar} name={channel.name} size={120} ring />
+        <div class="who">
+          <h1>
+            {channel.name}
+            {#if channel.verified}
+              <span class="check" aria-label="Verified"><Icon name="check-circle" size={22} /></span>
+            {/if}
+          </h1>
+          <p class="stats">{formatCount(channel.subs)} subscribers · {videos.length} videos</p>
+          <p class="blurb">Design & UI/UX experiments. Subscribe for more cats (and design content, of course). <span class="more">...more</span></p>
+        </div>
+        <div class="actions">
+          <button class="bell-btn" aria-label="Notifications" title="All notifications">
+            <Icon name="bell" size={20} />
+          </button>
+          <button class="subscribe" aria-pressed={app.isSubscribed(channel.slug)} onclick={() => app.toggleSubscribed(channel.slug)}>
+            {#if app.isSubscribed(channel.slug)}
+              <Icon name="bell" size={16} /> Subscribed
+            {:else}
+              Subscribe
+            {/if}
+          </button>
+        </div>
+      </header>
 
-  {#if app.channelTab === 'home'}
-    <section class="home-content">
-      <!-- ICMY shelf -->
-      {#if !app.icmyDismissed && shelf.length > 0}
-        <section class="shelf-zone" aria-label="In Case You Missed">
-          <header>
-            <h2>In Case You Missed</h2>
-            <span class="spacer"></span>
-            <button class="close" aria-label="Dismiss shelf" onclick={() => (app.icmyDismissed = true)}>
-              <Icon name="close" size={16} />
-            </button>
-          </header>
-          <div class="shelf">
-            <div class="scroller" bind:this={shelfScroller}>
+      <nav class="tabs" aria-label="Channel sections">
+        {#each CHANNEL_TABS as tab}
+          <button
+            class="tab"
+            class:active={app.channelTab === tab.id}
+            onclick={() => (app.channelTab = tab.id as any)}
+          >
+            {tab.label}
+          </button>
+        {/each}
+      </nav>
+
+      <main class="content">
+        {#if app.channelTab === 'home'}
+          <section class="section">
+            <header class="section-head">
+              <h2>In Case You Missed</h2>
+              <div class="scroll-controls">
+                <button class="sctrl" aria-label="Scroll left" onclick={() => shelfScroller?.scrollBy({ left: -464, behavior: 'smooth' })}><Icon name="chevron-left" size={18} /></button>
+                <button class="sctrl" aria-label="Scroll right" onclick={scrollShelf}><Icon name="chevron-right" size={18} /></button>
+              </div>
+            </header>
+            <div class="shelf" bind:this={shelfScroller}>
               {#each shelf as video (video.slug)}
-                <div class="shelf-card"><VideoCard {video} /></div>
+                <VideoCard {video} />
               {/each}
             </div>
-            <button class="next" aria-label="Scroll shelf" onclick={scrollShelf}>
-              <Icon name="chevron-right" size={20} />
-            </button>
-          </div>
-        </section>
-      {/if}
+          </section>
 
-      <!-- Community post (mock first slot) -->
-      <article class="community-post">
-        <div class="post-header">
-          <Avatar src={channel.avatar} name={channel.name} size={40} />
-          <div>
-            <span class="post-author">{channel.name}</span>
-            <span class="post-age">1 day ago</span>
-          </div>
-          <button class="kebab" aria-label="Post actions"><Icon name="more-vert" size={15} /></button>
-        </div>
-        <p class="post-text">It's finally time for youtube. what are your biggest issues with it?</p>
-        <div class="post-actions">
-          <button class="action"><Icon name="thumb-up" size={17} /> 2.9K</button>
-          <button class="action"><Icon name="thumb-down" size={17} /> 1.2K</button>
-          <button class="action"><Icon name="comment" size={17} /> 1.1K</button>
-          <button class="action"><Icon name="share" size={17} /> Share</button>
-        </div>
-      </article>
+          <section class="section community">
+            <div class="post">
+              <Avatar src={channel.avatar} name={channel.name} size={40} />
+              <div class="post-body">
+                <h3>{channel.name} posted</h3>
+                <p>Just uploaded a new video about CSS container queries! Check it out and let me know what you think.</p>
+                <div class="post-meta">
+                  <span>2 days ago</span>
+                  <button class="tool" onclick={() => app.shareOpen = true}><Icon name="share" size={16} /> Share</button>
+                </div>
+              </div>
+            </div>
+          </section>
 
-      <!-- Popular videos -->
-      <header class="section-head">
-        <h2>Popular videos</h2>
-      </header>
-      <div class="grid">
-        {#each videos as video (video.slug)}
-          <VideoCard {video} />
+          <section class="section">
+            <header class="section-head">
+              <h2>Popular videos</h2>
+            </header>
+            <div class="grid">
+              {#each videos.slice(0, 8) as video (video.slug)}
+                <VideoCard {video} />
+              {/each}
+            </div>
+          </section>
+        {:else if app.channelTab === 'shorts'}
+          <section class="shorts-section">
+            <div class="shorts-grid">
+              {#each shorts as video (video.slug)}
+                <ShortsCard {video} />
+              {/each}
+            </div>
+          </section>
         {:else}
-          <p class="empty">This channel has no videos yet</p>
-        {/each}
-      </div>
-    </section>
-  {:else if app.channelTab === 'shorts'}
-    <div class="shorts-grid">
-      {#each shorts as short (short.slug)}
-        <ShortsCard video={short} />
-      {:else}
-        <p class="empty">No shorts yet</p>
-      {/each}
+          <div class="placeholder">Coming soon — {app.channelTab} tab</div>
+        {/if}
+      </main>
     </div>
-  {:else}
-    <div class="placeholder">
-      <p>{CHANNEL_TABS.find(t => t.id === app.channelTab)?.label} coming soon</p>
-    </div>
-  {/if}
-</div>
+  {/snippet}
+
+  {@render renderPage(params)}
+</slot>
 
 <style>
   .channel-page {
     display: grid;
-    gap: var(--yt-space-5);
+    gap: var(--yt-space-6);
   }
-
   .banner-wrap {
     position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: var(--yt-radius-xl);
+    height: 180px;
     overflow: hidden;
-    margin-bottom: var(--yt-space-5);
+    border-radius: 0 0 var(--yt-radius-xl) var(--yt-radius-xl);
   }
-
   .banner {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
   }
-
   .banner-fallback {
-    inset: 0;
-    position: absolute;
-    background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   }
-
   .identity {
     display: flex;
     align-items: flex-end;
     gap: var(--yt-space-5);
-    margin-bottom: var(--yt-space-5);
-    padding-inline: var(--yt-space-1);
+    padding: var(--yt-space-6) var(--yt-space-6) 0;
+    margin-bottom: var(--yt-space-2);
   }
-
   .who {
     flex: 1;
     min-width: 0;
   }
-
   h1 {
     margin: 0;
-    font-size: var(--yt-fs-4xl);
+    font-size: var(--yt-fs-3xl);
     font-weight: var(--yt-weight-black);
-    line-height: var(--yt-line-tight);
     display: flex;
     align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
+    gap: var(--yt-space-2);
   }
-
   .check {
     color: var(--yt-accent);
-    flex: 0 0 auto;
+    flex-shrink: 0;
   }
-
   .stats {
-    margin: var(--yt-space-1) 0 0;
+    margin: var(--yt-space-1) 0;
     color: var(--yt-text-soft);
-    font-size: var(--yt-fs-md);
+    font-size: var(--yt-fs-sm);
   }
-
   .blurb {
-    margin: var(--yt-space-2) 0 0;
+    margin: var(--yt-space-1) 0 0;
     color: var(--yt-text-dim);
     font-size: var(--yt-fs-sm);
-    max-width: 60ch;
+    max-width: 600px;
   }
-
+  .more { color: var(--yt-text-soft); }
   .actions {
     display: flex;
     align-items: center;
     gap: var(--yt-space-3);
-    flex: 0 0 auto;
   }
-
   .bell-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--yt-radius-pill);
+    background: var(--yt-elevated);
     display: grid;
     place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: var(--yt-radius-pill);
-    background: none;
     color: var(--yt-text);
   }
-
-  .bell-btn:hover {
-    background: var(--yt-elevated);
-  }
-
+  .bell-btn:hover { background: var(--yt-hover); }
   .subscribe {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    height: 40px;
-    padding-inline: var(--yt-space-6);
+    gap: var(--yt-space-2);
+    height: 44px;
+    padding: 0 var(--yt-space-6);
     border-radius: var(--yt-radius-pill);
     background: var(--yt-accent);
     color: var(--yt-on-accent);
     font-weight: var(--yt-weight-bold);
-    font-size: var(--yt-fs-sm);
+    font-size: var(--yt-fs-md);
   }
-
-  .subscribe:hover {
-    background: #ff1a44;
-  }
+  .subscribe:hover { background: var(--yt-accent-bright); }
+  .subscribe:focus-visible { outline: 2px solid var(--yt-accent); outline-offset: 2px; }
 
   .tabs {
     display: flex;
     gap: var(--yt-space-6);
     border-bottom: 1px solid var(--yt-border);
-    margin-bottom: var(--yt-space-6);
+    margin: 0 var(--yt-space-6);
+    padding-bottom: 2px;
     overflow-x: auto;
     scrollbar-width: none;
   }
-
-  .tabs::-webkit-scrollbar {
-    display: none;
-  }
-
+  .tabs::-webkit-scrollbar { display: none; }
   .tab {
-    flex: 0 0 auto;
-    padding: 4px 2px var(--yt-space-3);
+    flex-shrink: 0;
+    padding: 10px 0;
     color: var(--yt-text-soft);
-    font-weight: var(--yt-weight-semibold);
     font-size: var(--yt-fs-md);
+    font-weight: var(--yt-weight-semibold);
     border-bottom: 2px solid transparent;
-    white-space: nowrap;
+    background: none;
   }
-
-  .tab:hover {
-    color: var(--yt-text);
-  }
-
+  .tab:hover { color: var(--yt-text); }
   .tab.active {
     color: var(--yt-text);
     border-color: var(--yt-accent);
   }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--yt-space-6);
+  .content {
+    padding: 0 var(--yt-space-6) var(--yt-space-10);
   }
-
-  .empty {
-    grid-column: 1 / -1;
-    color: var(--yt-text-dim);
-    padding: var(--yt-space-8);
-  }
-
-  .placeholder {
-    padding: var(--yt-space-16) 0;
-    text-align: center;
-    color: var(--yt-text-soft);
-    font-size: var(--yt-fs-lg);
-  }
-
-  /* Home content */
-  .home-content {
-    display: grid;
-    gap: var(--yt-space-6);
-  }
-
-  .shelf-zone header {
-    display: flex;
-    align-items: center;
-    margin-bottom: var(--yt-space-2);
-  }
-
-  .shelf-zone h2 {
-    font-size: var(--yt-fs-3xl);
-    font-weight: var(--yt-weight-extrabold);
-    letter-spacing: -0.2px;
-  }
-
-  .spacer {
-    flex: 1;
-  }
-
-  .close {
-    display: grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: var(--yt-radius-pill);
-    background: none;
-    color: var(--yt-text-soft);
-  }
-
-  .close:hover {
-    background: var(--yt-elevated);
-  }
-
-  .shelf {
-    position: relative;
-  }
-
-  .scroller {
-    display: flex;
-    gap: var(--yt-space-4);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    padding-bottom: 4px;
-  }
-
-  .scroller::-webkit-scrollbar {
-    display: none;
-  }
-
-  .shelf-card {
-    flex: 0 0 448px;
-    scroll-snap-align: start;
-    min-width: 0;
-  }
-
-  .next {
-    position: absolute;
-    top: 50%;
-    right: var(--yt-space-2);
-    transform: translateY(-50%);
-    display: grid;
-    place-items: center;
-    width: 44px;
-    height: 44px;
-    border-radius: var(--yt-radius-pill);
-    background: var(--yt-card);
-    color: var(--yt-text);
-    opacity: 0;
-    transition: opacity 0.15s ease;
-    box-shadow: var(--yt-shadow-panel);
-  }
-
-  .shelf:hover .next,
-  .next:focus-visible {
-    opacity: 1;
-  }
-
-  .next:hover {
-    background: var(--yt-elevated);
-  }
-
-  /* Community post */
-  .community-post {
-    background: var(--yt-card);
-    border-radius: var(--yt-radius-xl);
-    padding: var(--yt-space-4) var(--yt-space-5);
-    margin-bottom: var(--yt-space-4);
-  }
-
-  .post-header {
+  .section { margin-bottom: var(--yt-space-8); }
+  .section-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: var(--yt-space-3);
+    margin-bottom: var(--yt-space-4);
   }
-
-  .post-author {
-    font-weight: var(--yt-weight-bold);
-  }
-
-  .post-age {
-    margin-left: 8px;
-    color: var(--yt-text-soft);
-    font-size: var(--yt-fs-sm);
-  }
-
-  .kebab {
+  .section-head h2 { margin: 0; font-size: var(--yt-fs-xl); font-weight: var(--yt-weight-bold); }
+  .scroll-controls { display: flex; gap: var(--yt-space-1); }
+  .sctrl {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--yt-radius-pill);
+    background: var(--yt-elevated);
     display: grid;
     place-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: var(--yt-radius-pill);
-    color: var(--yt-text-soft);
-  }
-
-  .kebab:hover {
-    background: var(--yt-elevated);
     color: var(--yt-text);
   }
-
-  .post-text {
-    margin: 0 0 var(--yt-space-4);
-    font-size: var(--yt-fs-lg);
-    line-height: var(--yt-line-snug);
-    color: var(--yt-text);
-  }
-
-  .post-actions {
+  .sctrl:hover { background: var(--yt-hover); }
+  .shelf {
     display: flex;
-    gap: var(--yt-space-6);
+    gap: var(--yt-space-4);
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: var(--yt-space-2);
   }
+  .shelf::-webkit-scrollbar { display: none; }
 
-  .action {
+  .community {
+    background: var(--yt-card);
+    border-radius: var(--yt-radius-xl);
+    padding: var(--yt-space-4);
+    margin: 0 calc(-1 * var(--yt-space-6)) var(--yt-space-8);
+    padding-inline: var(--yt-space-6);
+  }
+  .post { display: flex; gap: var(--yt-space-3); }
+  .post-body { flex: 1; min-width: 0; }
+  .post-body h3 { margin: 0 0 4px; font-size: var(--yt-fs-md); font-weight: var(--yt-weight-semibold); }
+  .post-body p { margin: 0 0 8px; color: var(--yt-text-soft); font-size: var(--yt-fs-sm); line-height: var(--yt-line-relaxed); }
+  .post-meta { display: flex; align-items: center; gap: var(--yt-space-4); font-size: var(--yt-fs-xs); color: var(--yt-text-dim); }
+  .tool {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    color: var(--yt-text-soft);
-    font-size: var(--yt-fs-sm);
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: var(--yt-radius-pill);
+    background: var(--yt-elevated);
+    color: var(--yt-text);
+    font-size: var(--yt-fs-xs);
     font-weight: var(--yt-weight-medium);
   }
+  .tool:hover { background: var(--yt-hover); }
 
-  .action:hover {
-    color: var(--yt-text);
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--yt-space-5) var(--yt-space-4);
   }
 
-  /* Shorts grid */
+  .shorts-section {
+    margin: 0 calc(-1 * var(--yt-space-6));
+    padding-inline: var(--yt-space-6);
+  }
   .shorts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     gap: var(--yt-space-4);
   }
 
-  /* Section head */
-  .section-head {
-    margin: var(--yt-space-4) 0 var(--yt-space-2);
-  }
-
-  .section-head h2 {
-    margin: 0;
-    font-size: var(--yt-fs-3xl);
-    font-weight: var(--yt-weight-extrabold);
-    letter-spacing: -0.2px;
+  .placeholder {
+    padding: 80px 0;
+    display: grid;
+    place-items: center;
+    color: var(--yt-text-soft);
+    font-size: var(--yt-fs-lg);
   }
 </style>

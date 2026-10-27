@@ -1,11 +1,7 @@
 <script lang="ts">
   /*
-    App shell — trivial working canvas for the scaffold:
-    TopBar + Sidebar + router-less page switch driven by the runes store
-    (src/lib/stores.svelte.ts). Overlays mount from the same store flags.
-
-    TODO(later steps): fill the page stubs under src/lib/pages/ and the
-    component stubs under src/lib/components/.
+    App shell — uses svelte-routing for proper URL-based navigation.
+    TopBar + Sidebar + Router-driven pages. Overlays mount from store flags.
   */
   import TopBar from './lib/components/TopBar.svelte';
   import Sidebar from './lib/components/Sidebar.svelte';
@@ -17,6 +13,7 @@
   import Subscriptions from './lib/pages/Subscriptions.svelte';
   import Collections from './lib/pages/Collections.svelte';
   import ChannelPage from './lib/pages/ChannelPage.svelte';
+  import { Router, Route } from 'svelte-routing';
   import { app } from './lib/stores';
 </script>
 
@@ -25,17 +22,14 @@
   <div class="shell-body">
     <Sidebar />
     <main class="content">
-      {#if app.activePage === 'home'}
-        <Home />
-      {:else if app.activePage === 'shorts'}
-        <Shorts />
-      {:else if app.activePage === 'subscriptions'}
-        <Subscriptions />
-      {:else if app.activePage === 'collections'}
-        <Collections />
-      {:else if app.activePage === 'channel'}
-        <ChannelPage />
-      {/if}
+      <Router>
+        <Route path="/" component={Home as any} />
+        <Route path="/shorts" component={Shorts as any} />
+        <Route path="/subscriptions" component={Subscriptions as any} />
+        <Route path="/subscriptions/*" component={Subscriptions as any} />
+        <Route path="/collections" component={Collections as any} />
+        <Route path="/channel/:slug" component={ChannelPage as any} />
+      </Router>
     </main>
   </div>
 </div>
@@ -49,8 +43,6 @@
     display: flex;
     flex-direction: column;
     height: 100dvh;
-    /* Never let the app shell grow wider than the viewport; contained
-       scrollers (shelf, chip row) are allowed to scroll internally. */
     overflow-x: hidden;
   }
   .shell-body {
@@ -62,8 +54,6 @@
   .content {
     flex: 1 1 0;
     min-width: 0;
-    /* Cap the feed width so child grids/shelves can never force a
-       horizontal scrollbar. Centered on ultra-wide screens. */
     max-width: var(--yt-content-max);
     margin-inline: auto;
     width: 100%;

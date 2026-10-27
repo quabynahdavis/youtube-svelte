@@ -1,21 +1,23 @@
 <script lang="ts">
   /*
-    Sidebar — fixed rail under TopBar. Expanded 239px / collapsed 72px.
+    Sidebar — sticky rail under TopBar. Expanded 239px / collapsed 72px.
     Groups per mock: Home/Explore/Shorts/TV Mode ‖ History/Watch Later/
     Liked ‖ Playlists ▾ ‖ Collections ▾ ‖ Subscriptions ▾.
     Active pill = #272727 radius-10 with a red icon. No-ops stay honest
     (aria-disabled). Subscriptions group lists the subscribed channels
     from the catalog collections.
+    Uses svelte-routing for navigation.
   */
   import Avatar from './Avatar.svelte';
   import Icon from './Icon.svelte';
+  import { link } from 'svelte-routing';
   import { app, type SubsTab } from '../stores';
   import { getChannel, SUBSCRIBED_CHANNEL_SLUGS } from '../data/catalog';
 
   interface Item {
     label: string;
     icon: string;
-    page?: 'home' | 'shorts';
+    href?: string;
     disabled?: boolean;
   }
   interface Group {
@@ -29,9 +31,9 @@
   const groups: Group[] = [
     {
       items: [
-        { label: 'Home', icon: 'home', page: 'home' },
+        { label: 'Home', icon: 'home', href: '/' },
         { label: 'Explore', icon: 'explore', disabled: true },
-        { label: 'Shorts', icon: 'shorts', page: 'shorts' },
+        { label: 'Shorts', icon: 'shorts', href: '/shorts' },
         { label: 'TV Mode', icon: 'tv', disabled: true },
       ],
     },
@@ -54,13 +56,17 @@
   });
 
   const isActive = (item: Item, group: Group): boolean => {
-    const page = app.activePage;
     if (group.collapsible) {
-      // the three group headers are themselves navigation rows
       if (group.collapsible.key === 'playlists') return false;
-      return page === 'subscriptions' && app.subsTab === group.collapsible.subTab;
+      if (group.collapsible.subTab === 'collections') {
+        return app.activePage === 'collections' || (app.activePage === 'subscriptions' && app.subsTab === 'collections');
+      }
+      if (group.collapsible.subTab === 'subs') {
+        return app.activePage === 'subscriptions' && app.subsTab === 'subs';
+      }
+      return false;
     }
-    return item.page === page;
+    return item.href !== undefined && app.activePage === item.href.slice(1) || (item.href === '/' && app.activePage === 'home');
   };
 
   const onGroupClick = (group: Group): void => {
@@ -116,14 +122,10 @@
             >
               {@render row()}
             </button>
-          {:else}
-            <button
-              class="item"
-              class:active={isActive(item, group)}
-              onclick={() => item.page && app.navigateTo(item.page)}
-            >
+          {:else if item.href}
+            <a use:link href={item.href} class="item" class:active={isActive(item, group)}>
               {@render row()}
-            </button>
+            </a>
           {/if}
         </li>
       {/each}
@@ -135,20 +137,20 @@
       {:else if group.collapsible.key === 'collections'}
         <ul class="group-body group">
           <li>
-            <button class="item sub" class:active={app.activePage === 'subscriptions' && app.subsTab === 'collections'} onclick={() => app.goToSubs('collections')}>
+            <a use:link href="/collections" class="item sub" class:active={app.activePage === 'collections' || (app.activePage === 'subscriptions' && app.subsTab === 'collections')}>
               <Icon name="collections" size={16} />
               <span class="label">All collections</span>
-            </button>
+            </a>
           </li>
         </ul>
       {:else if group.collapsible.key === 'subscriptions'}
         <ul class="group-body group">
           {#each subscribedChannels as channel (channel.slug)}
             <li>
-              <button class="item sub" class:active={app.activeChannel?.slug === channel.slug && app.activePage === 'channel'} onclick={() => app.openChannel(channel.slug)}>
+              <a use:link href={`/channel/${channel.slug}`} class="item sub" class:active={app.activePage === 'channel' && app.activeChannel?.slug === channel.slug}>
                 <Avatar src={channel.avatar} name={channel.name} size={20} />
                 <span class="label">{channel.name}</span>
-              </button>
+              </a>
             </li>
           {/each}
         </ul>
@@ -202,7 +204,6 @@
       padding: 11px 0;
     }
   }
-
   .group {
     list-style: none;
     margin: 0;
@@ -230,6 +231,7 @@
     font-weight: var(--yt-weight-medium);
     line-height: var(--yt-line-normal);
     white-space: nowrap;
+    text-decoration: none;
   }
   .item:hover:not(:disabled) {
     background: var(--yt-card);
