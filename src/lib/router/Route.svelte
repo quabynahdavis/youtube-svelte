@@ -29,5 +29,5 @@
 </script>
 
 {#if active}
-  <svelte:component this={component} {params} />
+  {@render component({ params })}
 {/if}
