@@ -13,8 +13,12 @@
   import LiveChat from './lib/components/LiveChat.svelte';
   import ShareModal from './lib/components/ShareModal.svelte';
   import PersonalizeModal from './lib/components/PersonalizeModal.svelte';
+  import Dialog from './lib/components/Dialog.svelte';
+  import SettingsPanel from './lib/components/SettingsPanel.svelte';
   import VideoOptions from './lib/components/VideoOptions.svelte';
   import QualityOptions from './lib/components/QualityOptions.svelte';
+  import Backdrop from './lib/components/Backdrop.svelte';
+  import IconGrid from './lib/components/IconGrid.svelte';
   import Home from './lib/pages/Home.svelte';
   import Shorts from './lib/pages/Shorts.svelte';
   import Subscriptions from './lib/pages/Subscriptions.svelte';
@@ -27,6 +31,22 @@
   import { app } from './lib/stores';
 
   let isMobile = $state(false);
+
+  /** Demo swatch palette for the IconGrid picker (Figma Frame 37778 colors + extras). */
+  const ICON_PICKER_ITEMS = [
+    { id: 'slate-blue', color: '#484799', label: 'Slate Blue' },
+    { id: 'red', color: '#A51D29', label: 'Red' },
+    { id: 'green', color: '#34A930', label: 'Green' },
+    { id: 'purple', color: '#6B46C1', label: 'Purple' },
+    { id: 'pink', color: '#E91E63', label: 'Pink' },
+    { id: 'orange', color: '#F97316', label: 'Orange' },
+    { id: 'teal', color: '#0F766E', label: 'Teal' },
+    { id: 'amber', color: '#F59E0B', label: 'Amber' },
+    { id: 'indigo', color: '#4338CA', label: 'Indigo' },
+    { id: 'emerald', color: '#10B981', label: 'Emerald' },
+    { id: 'rose', color: '#F43F5E', label: 'Rose' },
+    { id: 'slate', color: '#64748B', label: 'Slate' },
+  ] as const;
 
   $effect(() => {
     const check = (): void => {
@@ -76,6 +96,16 @@
 {#if app.chatOpen}<LiveChat onClose={() => app.chatOpen = false} />{/if}
 {#if app.shareOpen}<ShareModal />{/if}
 {#if app.personalizeOpen}<PersonalizeModal />{/if}
+{#if app.dialogOpen}
+  <Dialog
+    open={app.dialogOpen}
+    title={app.dialogTitle}
+    badge={app.dialogBadge}
+    actions={app.dialogActions}
+    onClose={() => app.closeDialog()}
+  />
+{/if}
+{#if app.settingsOpen}<SettingsPanel open={true} onClose={() => app.closeSettings()} />{/if}
 {#if app.videoOptionsOpen && app.videoOptionsPos}
   <VideoOptions
     x={app.videoOptionsPos.x}
@@ -94,6 +124,24 @@
       app.closeQualityOptions();
     }}
     onDismiss={() => app.closeQualityOptions()}
+  />
+{/if}
+
+{#if app.backdropOpen}
+  <Backdrop
+    open={app.backdropOpen}
+    onClose={() => {
+      app.closeBackdrop();
+      app.closeIconGrid();
+    }}
+    opacity={0.5}
+  />
+{/if}
+{#if app.iconGridOpen}
+  <IconGrid
+    items={ICON_PICKER_ITEMS}
+    onSelect={(id) => app.selectIcon(id)}
+    selectedId={app.selectedIconId}
   />
 {/if}
 

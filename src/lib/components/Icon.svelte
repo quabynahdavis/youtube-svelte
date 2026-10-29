@@ -56,6 +56,8 @@
     Subtitles,
     Speedometer,
     Microphone,
+    Moon,
+    SunDim,
     Pencil,
     PushPin,
     Lightbulb,
@@ -131,7 +133,9 @@
     'stable-volume': Microphone,
     'ambient-mode': Lightbulb,
     stereo: Headphones,
-    quality: HighDefinition
+    quality: HighDefinition,
+    moon: Moon,
+    sun: SunDim
   };
 
   const SelectedIcon = $derived(iconMap[name] || House);

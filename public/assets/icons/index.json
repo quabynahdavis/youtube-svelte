@@ -1,0 +1,1850 @@
+[
+  {
+    "name": "icon-r00-c00",
+    "path": "/assets/icons/icon-r00-c00.png",
+    "row": 0,
+    "col": 0,
+    "source": "Icons-2.png",
+    "gridCell": [
+      64,
+      64,
+      216,
+      215
+    ],
+    "size": "84x80"
+  },
+  {
+    "name": "icon-r00-c01",
+    "path": "/assets/icons/icon-r00-c01.png",
+    "row": 0,
+    "col": 1,
+    "source": "Icons-2.png",
+    "gridCell": [
+      216,
+      64,
+      392,
+      215
+    ],
+    "size": "84x80"
+  },
+  {
+    "name": "icon-r00-c02",
+    "path": "/assets/icons/icon-r00-c02.png",
+    "row": 0,
+    "col": 2,
+    "source": "Icons-2.png",
+    "gridCell": [
+      392,
+      64,
+      569,
+      215
+    ],
+    "size": "68x82"
+  },
+  {
+    "name": "icon-r00-c03",
+    "path": "/assets/icons/icon-r00-c03.png",
+    "row": 0,
+    "col": 3,
+    "source": "Icons-2.png",
+    "gridCell": [
+      569,
+      64,
+      741,
+      215
+    ],
+    "size": "68x82"
+  },
+  {
+    "name": "icon-r00-c04",
+    "path": "/assets/icons/icon-r00-c04.png",
+    "row": 0,
+    "col": 4,
+    "source": "Icons-2.png",
+    "gridCell": [
+      741,
+      64,
+      919,
+      215
+    ],
+    "size": "80x68"
+  },
+  {
+    "name": "icon-r00-c05",
+    "path": "/assets/icons/icon-r00-c05.png",
+    "row": 0,
+    "col": 5,
+    "source": "Icons-2.png",
+    "gridCell": [
+      919,
+      64,
+      1095,
+      215
+    ],
+    "size": "80x68"
+  },
+  {
+    "name": "icon-r00-c06",
+    "path": "/assets/icons/icon-r00-c06.png",
+    "row": 0,
+    "col": 6,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1095,
+      64,
+      1271,
+      215
+    ],
+    "size": "72x72"
+  },
+  {
+    "name": "icon-r00-c07",
+    "path": "/assets/icons/icon-r00-c07.png",
+    "row": 0,
+    "col": 7,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1271,
+      64,
+      1447,
+      215
+    ],
+    "size": "72x72"
+  },
+  {
+    "name": "icon-r00-c08",
+    "path": "/assets/icons/icon-r00-c08.png",
+    "row": 0,
+    "col": 8,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1447,
+      64,
+      1623,
+      215
+    ],
+    "size": "76x63"
+  },
+  {
+    "name": "icon-r00-c09",
+    "path": "/assets/icons/icon-r00-c09.png",
+    "row": 0,
+    "col": 9,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1623,
+      64,
+      1799,
+      215
+    ],
+    "size": "72x63"
+  },
+  {
+    "name": "icon-r00-c10",
+    "path": "/assets/icons/icon-r00-c10.png",
+    "row": 0,
+    "col": 10,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1799,
+      64,
+      2001,
+      215
+    ],
+    "size": "80x80"
+  },
+  {
+    "name": "icon-r01-c00",
+    "path": "/assets/icons/icon-r01-c00.png",
+    "row": 1,
+    "col": 0,
+    "source": "Icons-2.png",
+    "gridCell": [
+      64,
+      215,
+      216,
+      391
+    ],
+    "size": "80x80"
+  },
+  {
+    "name": "icon-r01-c01",
+    "path": "/assets/icons/icon-r01-c01.png",
+    "row": 1,
+    "col": 1,
+    "source": "Icons-2.png",
+    "gridCell": [
+      216,
+      215,
+      392,
+      391
+    ],
+    "size": "76x80"
+  },
+  {
+    "name": "icon-r01-c02",
+    "path": "/assets/icons/icon-r01-c02.png",
+    "row": 1,
+    "col": 2,
+    "source": "Icons-2.png",
+    "gridCell": [
+      392,
+      215,
+      569,
+      391
+    ],
+    "size": "76x80"
+  },
+  {
+    "name": "icon-r01-c03",
+    "path": "/assets/icons/icon-r01-c03.png",
+    "row": 1,
+    "col": 3,
+    "source": "Icons-2.png",
+    "gridCell": [
+      569,
+      215,
+      741,
+      391
+    ],
+    "size": "25x44"
+  },
+  {
+    "name": "icon-r01-c04",
+    "path": "/assets/icons/icon-r01-c04.png",
+    "row": 1,
+    "col": 4,
+    "source": "Icons-2.png",
+    "gridCell": [
+      741,
+      215,
+      919,
+      391
+    ],
+    "size": "25x44"
+  },
+  {
+    "name": "icon-r01-c05",
+    "path": "/assets/icons/icon-r01-c05.png",
+    "row": 1,
+    "col": 5,
+    "source": "Icons-2.png",
+    "gridCell": [
+      919,
+      215,
+      1095,
+      391
+    ],
+    "size": "44x25"
+  },
+  {
+    "name": "icon-r01-c06",
+    "path": "/assets/icons/icon-r01-c06.png",
+    "row": 1,
+    "col": 6,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1095,
+      215,
+      1271,
+      391
+    ],
+    "size": "44x25"
+  },
+  {
+    "name": "icon-r01-c07",
+    "path": "/assets/icons/icon-r01-c07.png",
+    "row": 1,
+    "col": 7,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1271,
+      215,
+      1447,
+      391
+    ],
+    "size": "12x60"
+  },
+  {
+    "name": "icon-r01-c08",
+    "path": "/assets/icons/icon-r01-c08.png",
+    "row": 1,
+    "col": 8,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1447,
+      215,
+      1623,
+      391
+    ],
+    "size": "60x77"
+  },
+  {
+    "name": "icon-r01-c09",
+    "path": "/assets/icons/icon-r01-c09.png",
+    "row": 1,
+    "col": 9,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1623,
+      215,
+      1799,
+      391
+    ],
+    "size": "74x78"
+  },
+  {
+    "name": "icon-r01-c10",
+    "path": "/assets/icons/icon-r01-c10.png",
+    "row": 1,
+    "col": 10,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1799,
+      215,
+      2001,
+      391
+    ],
+    "size": "60x77"
+  },
+  {
+    "name": "icon-r02-c00",
+    "path": "/assets/icons/icon-r02-c00.png",
+    "row": 2,
+    "col": 0,
+    "source": "Icons-2.png",
+    "gridCell": [
+      64,
+      391,
+      216,
+      566
+    ],
+    "size": "92x62"
+  },
+  {
+    "name": "icon-r02-c01",
+    "path": "/assets/icons/icon-r02-c01.png",
+    "row": 2,
+    "col": 1,
+    "source": "Icons-2.png",
+    "gridCell": [
+      216,
+      391,
+      392,
+      566
+    ],
+    "size": "92x62"
+  },
+  {
+    "name": "icon-r02-c02",
+    "path": "/assets/icons/icon-r02-c02.png",
+    "row": 2,
+    "col": 2,
+    "source": "Icons-2.png",
+    "gridCell": [
+      392,
+      391,
+      569,
+      566
+    ],
+    "size": "68x85"
+  },
+  {
+    "name": "icon-r02-c03",
+    "path": "/assets/icons/icon-r02-c03.png",
+    "row": 2,
+    "col": 3,
+    "source": "Icons-2.png",
+    "gridCell": [
+      569,
+      391,
+      741,
+      566
+    ],
+    "size": "68x84"
+  },
+  {
+    "name": "icon-r02-c04",
+    "path": "/assets/icons/icon-r02-c04.png",
+    "row": 2,
+    "col": 4,
+    "source": "Icons-2.png",
+    "gridCell": [
+      741,
+      391,
+      919,
+      566
+    ],
+    "size": "60x80"
+  },
+  {
+    "name": "icon-r02-c05",
+    "path": "/assets/icons/icon-r02-c05.png",
+    "row": 2,
+    "col": 5,
+    "source": "Icons-2.png",
+    "gridCell": [
+      919,
+      391,
+      1095,
+      566
+    ],
+    "size": "60x80"
+  },
+  {
+    "name": "icon-r02-c06",
+    "path": "/assets/icons/icon-r02-c06.png",
+    "row": 2,
+    "col": 6,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1095,
+      391,
+      1271,
+      566
+    ],
+    "size": "84x62"
+  },
+  {
+    "name": "icon-r02-c07",
+    "path": "/assets/icons/icon-r02-c07.png",
+    "row": 2,
+    "col": 7,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1271,
+      391,
+      1447,
+      566
+    ],
+    "size": "84x62"
+  },
+  {
+    "name": "icon-r02-c08",
+    "path": "/assets/icons/icon-r02-c08.png",
+    "row": 2,
+    "col": 8,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1447,
+      391,
+      1623,
+      566
+    ],
+    "size": "88x71"
+  },
+  {
+    "name": "icon-r02-c09",
+    "path": "/assets/icons/icon-r02-c09.png",
+    "row": 2,
+    "col": 9,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1623,
+      391,
+      1799,
+      566
+    ],
+    "size": "88x71"
+  },
+  {
+    "name": "icon-r02-c10",
+    "path": "/assets/icons/icon-r02-c10.png",
+    "row": 2,
+    "col": 10,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1799,
+      391,
+      2001,
+      566
+    ],
+    "size": "80x73"
+  },
+  {
+    "name": "icon-r03-c00",
+    "path": "/assets/icons/icon-r03-c00.png",
+    "row": 3,
+    "col": 0,
+    "source": "Icons-2.png",
+    "gridCell": [
+      64,
+      566,
+      216,
+      745
+    ],
+    "size": "80x72"
+  },
+  {
+    "name": "icon-r03-c01",
+    "path": "/assets/icons/icon-r03-c01.png",
+    "row": 3,
+    "col": 1,
+    "source": "Icons-2.png",
+    "gridCell": [
+      216,
+      566,
+      392,
+      745
+    ],
+    "size": "80x81"
+  },
+  {
+    "name": "icon-r03-c02",
+    "path": "/assets/icons/icon-r03-c02.png",
+    "row": 3,
+    "col": 2,
+    "source": "Icons-2.png",
+    "gridCell": [
+      392,
+      566,
+      569,
+      745
+    ],
+    "size": "80x80"
+  },
+  {
+    "name": "icon-r03-c03",
+    "path": "/assets/icons/icon-r03-c03.png",
+    "row": 3,
+    "col": 3,
+    "source": "Icons-2.png",
+    "gridCell": [
+      569,
+      566,
+      741,
+      745
+    ],
+    "size": "64x85"
+  },
+  {
+    "name": "icon-r03-c04",
+    "path": "/assets/icons/icon-r03-c04.png",
+    "row": 3,
+    "col": 4,
+    "source": "Icons-2.png",
+    "gridCell": [
+      741,
+      566,
+      919,
+      745
+    ],
+    "size": "64x84"
+  },
+  {
+    "name": "icon-r03-c05",
+    "path": "/assets/icons/icon-r03-c05.png",
+    "row": 3,
+    "col": 5,
+    "source": "Icons-2.png",
+    "gridCell": [
+      919,
+      566,
+      1095,
+      745
+    ],
+    "size": "66x81"
+  },
+  {
+    "name": "icon-r03-c06",
+    "path": "/assets/icons/icon-r03-c06.png",
+    "row": 3,
+    "col": 6,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1095,
+      566,
+      1271,
+      745
+    ],
+    "size": "66x80"
+  },
+  {
+    "name": "icon-r03-c07",
+    "path": "/assets/icons/icon-r03-c07.png",
+    "row": 3,
+    "col": 7,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1271,
+      566,
+      1447,
+      745
+    ],
+    "size": "68x46"
+  },
+  {
+    "name": "icon-r03-c08",
+    "path": "/assets/icons/icon-r03-c08.png",
+    "row": 3,
+    "col": 8,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1447,
+      566,
+      1623,
+      745
+    ],
+    "size": "76x76"
+  },
+  {
+    "name": "icon-r03-c09",
+    "path": "/assets/icons/icon-r03-c09.png",
+    "row": 3,
+    "col": 9,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1623,
+      566,
+      1799,
+      745
+    ],
+    "size": "52x73"
+  },
+  {
+    "name": "icon-r03-c10",
+    "path": "/assets/icons/icon-r03-c10.png",
+    "row": 3,
+    "col": 10,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1799,
+      566,
+      2001,
+      745
+    ],
+    "size": "76x76"
+  },
+  {
+    "name": "icon-r04-c00",
+    "path": "/assets/icons/icon-r04-c00.png",
+    "row": 4,
+    "col": 0,
+    "source": "Icons-2.png",
+    "gridCell": [
+      64,
+      745,
+      216,
+      920
+    ],
+    "size": "76x76"
+  },
+  {
+    "name": "icon-r04-c01",
+    "path": "/assets/icons/icon-r04-c01.png",
+    "row": 4,
+    "col": 1,
+    "source": "Icons-2.png",
+    "gridCell": [
+      216,
+      745,
+      392,
+      920
+    ],
+    "size": "60x60"
+  },
+  {
+    "name": "icon-r04-c02",
+    "path": "/assets/icons/icon-r04-c02.png",
+    "row": 4,
+    "col": 2,
+    "source": "Icons-2.png",
+    "gridCell": [
+      392,
+      745,
+      569,
+      920
+    ],
+    "size": "60x60"
+  },
+  {
+    "name": "icon-r04-c03",
+    "path": "/assets/icons/icon-r04-c03.png",
+    "row": 4,
+    "col": 3,
+    "source": "Icons-2.png",
+    "gridCell": [
+      569,
+      745,
+      741,
+      920
+    ],
+    "size": "72x76"
+  },
+  {
+    "name": "icon-r04-c04",
+    "path": "/assets/icons/icon-r04-c04.png",
+    "row": 4,
+    "col": 4,
+    "source": "Icons-2.png",
+    "gridCell": [
+      741,
+      745,
+      919,
+      920
+    ],
+    "size": "72x76"
+  },
+  {
+    "name": "icon-r04-c05",
+    "path": "/assets/icons/icon-r04-c05.png",
+    "row": 4,
+    "col": 5,
+    "source": "Icons-2.png",
+    "gridCell": [
+      919,
+      745,
+      1095,
+      920
+    ],
+    "size": "78x66"
+  },
+  {
+    "name": "icon-r04-c06",
+    "path": "/assets/icons/icon-r04-c06.png",
+    "row": 4,
+    "col": 6,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1095,
+      745,
+      1271,
+      920
+    ],
+    "size": "84x69"
+  },
+  {
+    "name": "icon-r04-c07",
+    "path": "/assets/icons/icon-r04-c07.png",
+    "row": 4,
+    "col": 7,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1271,
+      745,
+      1447,
+      920
+    ],
+    "size": "70x70"
+  },
+  {
+    "name": "icon-r04-c08",
+    "path": "/assets/icons/icon-r04-c08.png",
+    "row": 4,
+    "col": 8,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1447,
+      745,
+      1623,
+      920
+    ],
+    "size": "76x68"
+  },
+  {
+    "name": "icon-r04-c09",
+    "path": "/assets/icons/icon-r04-c09.png",
+    "row": 4,
+    "col": 9,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1623,
+      745,
+      1799,
+      920
+    ],
+    "size": "52x64"
+  },
+  {
+    "name": "icon-r04-c10",
+    "path": "/assets/icons/icon-r04-c10.png",
+    "row": 4,
+    "col": 10,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1799,
+      745,
+      2001,
+      920
+    ],
+    "size": "76x76"
+  },
+  {
+    "name": "icon-r05-c00",
+    "path": "/assets/icons/icon-r05-c00.png",
+    "row": 5,
+    "col": 0,
+    "source": "Icons-2.png",
+    "gridCell": [
+      64,
+      920,
+      216,
+      1097
+    ],
+    "size": "76x76"
+  },
+  {
+    "name": "icon-r05-c01",
+    "path": "/assets/icons/icon-r05-c01.png",
+    "row": 5,
+    "col": 1,
+    "source": "Icons-2.png",
+    "gridCell": [
+      216,
+      920,
+      392,
+      1097
+    ],
+    "size": "56x65"
+  },
+  {
+    "name": "icon-r05-c02",
+    "path": "/assets/icons/icon-r05-c02.png",
+    "row": 5,
+    "col": 2,
+    "source": "Icons-2.png",
+    "gridCell": [
+      392,
+      920,
+      569,
+      1097
+    ],
+    "size": "80x73"
+  },
+  {
+    "name": "icon-r05-c03",
+    "path": "/assets/icons/icon-r05-c03.png",
+    "row": 5,
+    "col": 3,
+    "source": "Icons-2.png",
+    "gridCell": [
+      569,
+      920,
+      741,
+      1097
+    ],
+    "size": "80x73"
+  },
+  {
+    "name": "icon-r05-c04",
+    "path": "/assets/icons/icon-r05-c04.png",
+    "row": 5,
+    "col": 4,
+    "source": "Icons-2.png",
+    "gridCell": [
+      741,
+      920,
+      919,
+      1097
+    ],
+    "size": "80x73"
+  },
+  {
+    "name": "icon-r05-c05",
+    "path": "/assets/icons/icon-r05-c05.png",
+    "row": 5,
+    "col": 5,
+    "source": "Icons-2.png",
+    "gridCell": [
+      919,
+      920,
+      1095,
+      1097
+    ],
+    "size": "80x73"
+  },
+  {
+    "name": "icon-r05-c06",
+    "path": "/assets/icons/icon-r05-c06.png",
+    "row": 5,
+    "col": 6,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1095,
+      920,
+      1271,
+      1097
+    ],
+    "size": "68x44"
+  },
+  {
+    "name": "icon-r05-c07",
+    "path": "/assets/icons/icon-r05-c07.png",
+    "row": 5,
+    "col": 7,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1271,
+      920,
+      1447,
+      1097
+    ],
+    "size": "75x78"
+  },
+  {
+    "name": "icon-r05-c08",
+    "path": "/assets/icons/icon-r05-c08.png",
+    "row": 5,
+    "col": 8,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1447,
+      920,
+      1623,
+      1097
+    ],
+    "size": "52x52"
+  },
+  {
+    "name": "icon-r05-c09",
+    "path": "/assets/icons/icon-r05-c09.png",
+    "row": 5,
+    "col": 9,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1623,
+      920,
+      1799,
+      1097
+    ],
+    "size": "74x54"
+  },
+  {
+    "name": "icon-r05-c10",
+    "path": "/assets/icons/icon-r05-c10.png",
+    "row": 5,
+    "col": 10,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1799,
+      920,
+      2001,
+      1097
+    ],
+    "size": "84x56"
+  },
+  {
+    "name": "icon-r06-c00",
+    "path": "/assets/icons/icon-r06-c00.png",
+    "row": 6,
+    "col": 0,
+    "source": "Icons-2.png",
+    "gridCell": [
+      64,
+      1097,
+      216,
+      1271
+    ],
+    "size": "68x77"
+  },
+  {
+    "name": "icon-r06-c01",
+    "path": "/assets/icons/icon-r06-c01.png",
+    "row": 6,
+    "col": 1,
+    "source": "Icons-2.png",
+    "gridCell": [
+      216,
+      1097,
+      392,
+      1271
+    ],
+    "size": "69x69"
+  },
+  {
+    "name": "icon-r06-c02",
+    "path": "/assets/icons/icon-r06-c02.png",
+    "row": 6,
+    "col": 2,
+    "source": "Icons-2.png",
+    "gridCell": [
+      392,
+      1097,
+      569,
+      1271
+    ],
+    "size": "60x44"
+  },
+  {
+    "name": "icon-r06-c03",
+    "path": "/assets/icons/icon-r06-c03.png",
+    "row": 6,
+    "col": 3,
+    "source": "Icons-2.png",
+    "gridCell": [
+      569,
+      1097,
+      741,
+      1271
+    ],
+    "size": "64x46"
+  },
+  {
+    "name": "icon-r06-c04",
+    "path": "/assets/icons/icon-r06-c04.png",
+    "row": 6,
+    "col": 4,
+    "source": "Icons-2.png",
+    "gridCell": [
+      741,
+      1097,
+      919,
+      1271
+    ],
+    "size": "68x52"
+  },
+  {
+    "name": "icon-r06-c05",
+    "path": "/assets/icons/icon-r06-c05.png",
+    "row": 6,
+    "col": 5,
+    "source": "Icons-2.png",
+    "gridCell": [
+      919,
+      1097,
+      1095,
+      1271
+    ],
+    "size": "68x52"
+  },
+  {
+    "name": "icon-r06-c06",
+    "path": "/assets/icons/icon-r06-c06.png",
+    "row": 6,
+    "col": 6,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1095,
+      1097,
+      1271,
+      1271
+    ],
+    "size": "81x60"
+  },
+  {
+    "name": "icon-r06-c07",
+    "path": "/assets/icons/icon-r06-c07.png",
+    "row": 6,
+    "col": 7,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1271,
+      1097,
+      1447,
+      1271
+    ],
+    "size": "76x70"
+  },
+  {
+    "name": "icon-r06-c08",
+    "path": "/assets/icons/icon-r06-c08.png",
+    "row": 6,
+    "col": 8,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1447,
+      1097,
+      1623,
+      1271
+    ],
+    "size": "76x38"
+  },
+  {
+    "name": "icon-r06-c09",
+    "path": "/assets/icons/icon-r06-c09.png",
+    "row": 6,
+    "col": 9,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1623,
+      1097,
+      1799,
+      1271
+    ],
+    "size": "76x60"
+  },
+  {
+    "name": "icon-r06-c10",
+    "path": "/assets/icons/icon-r06-c10.png",
+    "row": 6,
+    "col": 10,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1799,
+      1097,
+      2001,
+      1271
+    ],
+    "size": "82x35"
+  },
+  {
+    "name": "icon-r07-c00",
+    "path": "/assets/icons/icon-r07-c00.png",
+    "row": 7,
+    "col": 0,
+    "source": "Icons-2.png",
+    "gridCell": [
+      64,
+      1271,
+      216,
+      1443
+    ],
+    "size": "84x36"
+  },
+  {
+    "name": "icon-r07-c01",
+    "path": "/assets/icons/icon-r07-c01.png",
+    "row": 7,
+    "col": 1,
+    "source": "Icons-2.png",
+    "gridCell": [
+      216,
+      1271,
+      392,
+      1443
+    ],
+    "size": "84x36"
+  },
+  {
+    "name": "icon-r07-c02",
+    "path": "/assets/icons/icon-r07-c02.png",
+    "row": 7,
+    "col": 2,
+    "source": "Icons-2.png",
+    "gridCell": [
+      392,
+      1271,
+      569,
+      1443
+    ],
+    "size": "84x36"
+  },
+  {
+    "name": "icon-r07-c03",
+    "path": "/assets/icons/icon-r07-c03.png",
+    "row": 7,
+    "col": 3,
+    "source": "Icons-2.png",
+    "gridCell": [
+      569,
+      1271,
+      741,
+      1443
+    ],
+    "size": "84x36"
+  },
+  {
+    "name": "icon-r07-c04",
+    "path": "/assets/icons/icon-r07-c04.png",
+    "row": 7,
+    "col": 4,
+    "source": "Icons-2.png",
+    "gridCell": [
+      741,
+      1271,
+      919,
+      1443
+    ],
+    "size": "68x68"
+  },
+  {
+    "name": "icon-r07-c05",
+    "path": "/assets/icons/icon-r07-c05.png",
+    "row": 7,
+    "col": 5,
+    "source": "Icons-2.png",
+    "gridCell": [
+      919,
+      1271,
+      1095,
+      1443
+    ],
+    "size": "36x44"
+  },
+  {
+    "name": "icon-r07-c06",
+    "path": "/assets/icons/icon-r07-c06.png",
+    "row": 7,
+    "col": 6,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1095,
+      1271,
+      1271,
+      1443
+    ],
+    "size": "48x44"
+  },
+  {
+    "name": "icon-r07-c07",
+    "path": "/assets/icons/icon-r07-c07.png",
+    "row": 7,
+    "col": 7,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1271,
+      1271,
+      1447,
+      1443
+    ],
+    "size": "68x63"
+  },
+  {
+    "name": "icon-r07-c08",
+    "path": "/assets/icons/icon-r07-c08.png",
+    "row": 7,
+    "col": 8,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1447,
+      1271,
+      1623,
+      1443
+    ],
+    "size": "68x60"
+  },
+  {
+    "name": "icon-r07-c09",
+    "path": "/assets/icons/icon-r07-c09.png",
+    "row": 7,
+    "col": 9,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1623,
+      1271,
+      1799,
+      1443
+    ],
+    "size": "68x60"
+  },
+  {
+    "name": "icon-r07-c10",
+    "path": "/assets/icons/icon-r07-c10.png",
+    "row": 7,
+    "col": 10,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1799,
+      1271,
+      2001,
+      1443
+    ],
+    "size": "76x60"
+  },
+  {
+    "name": "icon-r08-c00",
+    "path": "/assets/icons/icon-r08-c00.png",
+    "row": 8,
+    "col": 0,
+    "source": "Icons-2.png",
+    "gridCell": [
+      64,
+      1443,
+      216,
+      1623
+    ],
+    "size": "76x60"
+  },
+  {
+    "name": "icon-r08-c01",
+    "path": "/assets/icons/icon-r08-c01.png",
+    "row": 8,
+    "col": 1,
+    "source": "Icons-2.png",
+    "gridCell": [
+      216,
+      1443,
+      392,
+      1623
+    ],
+    "size": "68x44"
+  },
+  {
+    "name": "icon-r08-c02",
+    "path": "/assets/icons/icon-r08-c02.png",
+    "row": 8,
+    "col": 2,
+    "source": "Icons-2.png",
+    "gridCell": [
+      392,
+      1443,
+      569,
+      1623
+    ],
+    "size": "68x60"
+  },
+  {
+    "name": "icon-r08-c03",
+    "path": "/assets/icons/icon-r08-c03.png",
+    "row": 8,
+    "col": 3,
+    "source": "Icons-2.png",
+    "gridCell": [
+      569,
+      1443,
+      741,
+      1623
+    ],
+    "size": "68x68"
+  },
+  {
+    "name": "icon-r08-c04",
+    "path": "/assets/icons/icon-r08-c04.png",
+    "row": 8,
+    "col": 4,
+    "source": "Icons-2.png",
+    "gridCell": [
+      741,
+      1443,
+      919,
+      1623
+    ],
+    "size": "68x68"
+  },
+  {
+    "name": "icon-r08-c05",
+    "path": "/assets/icons/icon-r08-c05.png",
+    "row": 8,
+    "col": 5,
+    "source": "Icons-2.png",
+    "gridCell": [
+      919,
+      1443,
+      1095,
+      1623
+    ],
+    "size": "76x74"
+  },
+  {
+    "name": "icon-r08-c06",
+    "path": "/assets/icons/icon-r08-c06.png",
+    "row": 8,
+    "col": 6,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1095,
+      1443,
+      1271,
+      1623
+    ],
+    "size": "76x74"
+  },
+  {
+    "name": "icon-r08-c07",
+    "path": "/assets/icons/icon-r08-c07.png",
+    "row": 8,
+    "col": 7,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1271,
+      1443,
+      1447,
+      1623
+    ],
+    "size": "76x60"
+  },
+  {
+    "name": "icon-r08-c08",
+    "path": "/assets/icons/icon-r08-c08.png",
+    "row": 8,
+    "col": 8,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1447,
+      1443,
+      1623,
+      1623
+    ],
+    "size": "76x76"
+  },
+  {
+    "name": "icon-r08-c09",
+    "path": "/assets/icons/icon-r08-c09.png",
+    "row": 8,
+    "col": 9,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1623,
+      1443,
+      1799,
+      1623
+    ],
+    "size": "76x76"
+  },
+  {
+    "name": "icon-r08-c10",
+    "path": "/assets/icons/icon-r08-c10.png",
+    "row": 8,
+    "col": 10,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1799,
+      1443,
+      2001,
+      1623
+    ],
+    "size": "76x60"
+  },
+  {
+    "name": "icon-r09-c00",
+    "path": "/assets/icons/icon-r09-c00.png",
+    "row": 9,
+    "col": 0,
+    "source": "Icons-2.png",
+    "gridCell": [
+      64,
+      1623,
+      216,
+      1799
+    ],
+    "size": "76x60"
+  },
+  {
+    "name": "icon-r09-c01",
+    "path": "/assets/icons/icon-r09-c01.png",
+    "row": 9,
+    "col": 1,
+    "source": "Icons-2.png",
+    "gridCell": [
+      216,
+      1623,
+      392,
+      1799
+    ],
+    "size": "76x76"
+  },
+  {
+    "name": "icon-r09-c02",
+    "path": "/assets/icons/icon-r09-c02.png",
+    "row": 9,
+    "col": 2,
+    "source": "Icons-2.png",
+    "gridCell": [
+      392,
+      1623,
+      569,
+      1799
+    ],
+    "size": "64x75"
+  },
+  {
+    "name": "icon-r09-c03",
+    "path": "/assets/icons/icon-r09-c03.png",
+    "row": 9,
+    "col": 3,
+    "source": "Icons-2.png",
+    "gridCell": [
+      569,
+      1623,
+      741,
+      1799
+    ],
+    "size": "68x68"
+  },
+  {
+    "name": "icon-r09-c04",
+    "path": "/assets/icons/icon-r09-c04.png",
+    "row": 9,
+    "col": 4,
+    "source": "Icons-2.png",
+    "gridCell": [
+      741,
+      1623,
+      919,
+      1799
+    ],
+    "size": "76x52"
+  },
+  {
+    "name": "icon-r09-c05",
+    "path": "/assets/icons/icon-r09-c05.png",
+    "row": 9,
+    "col": 5,
+    "source": "Icons-2.png",
+    "gridCell": [
+      919,
+      1623,
+      1095,
+      1799
+    ],
+    "size": "68x76"
+  },
+  {
+    "name": "icon-r09-c06",
+    "path": "/assets/icons/icon-r09-c06.png",
+    "row": 9,
+    "col": 6,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1095,
+      1623,
+      1271,
+      1799
+    ],
+    "size": "60x60"
+  },
+  {
+    "name": "icon-r09-c07",
+    "path": "/assets/icons/icon-r09-c07.png",
+    "row": 9,
+    "col": 7,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1271,
+      1623,
+      1447,
+      1799
+    ],
+    "size": "64x64"
+  },
+  {
+    "name": "icon-r09-c08",
+    "path": "/assets/icons/icon-r09-c08.png",
+    "row": 9,
+    "col": 8,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1447,
+      1623,
+      1623,
+      1799
+    ],
+    "size": "68x77"
+  },
+  {
+    "name": "icon-r09-c09",
+    "path": "/assets/icons/icon-r09-c09.png",
+    "row": 9,
+    "col": 9,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1623,
+      1623,
+      1799,
+      1799
+    ],
+    "size": "68x68"
+  },
+  {
+    "name": "icon-r09-c10",
+    "path": "/assets/icons/icon-r09-c10.png",
+    "row": 9,
+    "col": 10,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1799,
+      1623,
+      2001,
+      1799
+    ],
+    "size": "68x68"
+  },
+  {
+    "name": "icon-r10-c00",
+    "path": "/assets/icons/icon-r10-c00.png",
+    "row": 10,
+    "col": 0,
+    "source": "Icons-2.png",
+    "gridCell": [
+      64,
+      1799,
+      216,
+      1974
+    ],
+    "size": "68x66"
+  },
+  {
+    "name": "icon-r10-c01",
+    "path": "/assets/icons/icon-r10-c01.png",
+    "row": 10,
+    "col": 1,
+    "source": "Icons-2.png",
+    "gridCell": [
+      216,
+      1799,
+      392,
+      1974
+    ],
+    "size": "68x66"
+  },
+  {
+    "name": "icon-r10-c02",
+    "path": "/assets/icons/icon-r10-c02.png",
+    "row": 10,
+    "col": 2,
+    "source": "Icons-2.png",
+    "gridCell": [
+      392,
+      1799,
+      569,
+      1974
+    ],
+    "size": "68x68"
+  },
+  {
+    "name": "icon-r10-c03",
+    "path": "/assets/icons/icon-r10-c03.png",
+    "row": 10,
+    "col": 3,
+    "source": "Icons-2.png",
+    "gridCell": [
+      569,
+      1799,
+      741,
+      1974
+    ],
+    "size": "44x73"
+  },
+  {
+    "name": "icon-r10-c04",
+    "path": "/assets/icons/icon-r10-c04.png",
+    "row": 10,
+    "col": 4,
+    "source": "Icons-2.png",
+    "gridCell": [
+      741,
+      1799,
+      919,
+      1974
+    ],
+    "size": "73x44"
+  },
+  {
+    "name": "icon-r10-c05",
+    "path": "/assets/icons/icon-r10-c05.png",
+    "row": 10,
+    "col": 5,
+    "source": "Icons-2.png",
+    "gridCell": [
+      919,
+      1799,
+      1095,
+      1974
+    ],
+    "size": "74x74"
+  },
+  {
+    "name": "icon-r10-c06",
+    "path": "/assets/icons/icon-r10-c06.png",
+    "row": 10,
+    "col": 6,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1095,
+      1799,
+      1271,
+      1974
+    ],
+    "size": "74x74"
+  },
+  {
+    "name": "icon-r10-c07",
+    "path": "/assets/icons/icon-r10-c07.png",
+    "row": 10,
+    "col": 7,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1271,
+      1799,
+      1447,
+      1974
+    ],
+    "size": "76x60"
+  },
+  {
+    "name": "icon-r10-c08",
+    "path": "/assets/icons/icon-r10-c08.png",
+    "row": 10,
+    "col": 8,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1447,
+      1799,
+      1623,
+      1974
+    ],
+    "size": "68x78"
+  },
+  {
+    "name": "icon-r10-c09",
+    "path": "/assets/icons/icon-r10-c09.png",
+    "row": 10,
+    "col": 9,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1623,
+      1799,
+      1799,
+      1974
+    ],
+    "size": "68x78"
+  },
+  {
+    "name": "icon-r10-c10",
+    "path": "/assets/icons/icon-r10-c10.png",
+    "row": 10,
+    "col": 10,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1799,
+      1799,
+      2001,
+      1974
+    ],
+    "size": "46x52"
+  },
+  {
+    "name": "icon-r11-c00",
+    "path": "/assets/icons/icon-r11-c00.png",
+    "row": 11,
+    "col": 0,
+    "source": "Icons-2.png",
+    "gridCell": [
+      64,
+      1974,
+      216,
+      2234
+    ],
+    "size": "62x196"
+  },
+  {
+    "name": "icon-r11-c01",
+    "path": "/assets/icons/icon-r11-c01.png",
+    "row": 11,
+    "col": 1,
+    "source": "Icons-2.png",
+    "gridCell": [
+      216,
+      1974,
+      392,
+      2234
+    ],
+    "size": "60x60"
+  },
+  {
+    "name": "icon-r11-c02",
+    "path": "/assets/icons/icon-r11-c02.png",
+    "row": 11,
+    "col": 2,
+    "source": "Icons-2.png",
+    "gridCell": [
+      392,
+      1974,
+      569,
+      2234
+    ],
+    "size": "60x60"
+  },
+  {
+    "name": "icon-r11-c03",
+    "path": "/assets/icons/icon-r11-c03.png",
+    "row": 11,
+    "col": 3,
+    "source": "Icons-2.png",
+    "gridCell": [
+      569,
+      1974,
+      741,
+      2234
+    ],
+    "size": "60x22"
+  },
+  {
+    "name": "icon-r11-c04",
+    "path": "/assets/icons/icon-r11-c04.png",
+    "row": 11,
+    "col": 4,
+    "source": "Icons-2.png",
+    "gridCell": [
+      741,
+      1974,
+      919,
+      2234
+    ],
+    "size": "76x76"
+  },
+  {
+    "name": "icon-r11-c05",
+    "path": "/assets/icons/icon-r11-c05.png",
+    "row": 11,
+    "col": 5,
+    "source": "Icons-2.png",
+    "gridCell": [
+      919,
+      1974,
+      1095,
+      2234
+    ],
+    "size": "76x60"
+  },
+  {
+    "name": "icon-r11-c06",
+    "path": "/assets/icons/icon-r11-c06.png",
+    "row": 11,
+    "col": 6,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1095,
+      1974,
+      1271,
+      2234
+    ],
+    "size": "76x76"
+  },
+  {
+    "name": "icon-r11-c07",
+    "path": "/assets/icons/icon-r11-c07.png",
+    "row": 11,
+    "col": 7,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1271,
+      1974,
+      1447,
+      2234
+    ],
+    "size": "76x60"
+  },
+  {
+    "name": "icon-r11-c08",
+    "path": "/assets/icons/icon-r11-c08.png",
+    "row": 11,
+    "col": 8,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1447,
+      1974,
+      1623,
+      2234
+    ],
+    "size": "60x68"
+  },
+  {
+    "name": "icon-r11-c09",
+    "path": "/assets/icons/icon-r11-c09.png",
+    "row": 11,
+    "col": 9,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1623,
+      1974,
+      1799,
+      2234
+    ],
+    "size": "46x86"
+  },
+  {
+    "name": "icon-r11-c10",
+    "path": "/assets/icons/icon-r11-c10.png",
+    "row": 11,
+    "col": 10,
+    "source": "Icons-2.png",
+    "gridCell": [
+      1799,
+      1974,
+      2001,
+      2234
+    ],
+    "size": "46x86"
+  }
+]

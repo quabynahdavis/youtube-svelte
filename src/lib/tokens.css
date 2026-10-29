@@ -114,8 +114,28 @@
   --yt-z-modal:   300;   /* share / personalize dialogs */
   --yt-z-context: 400;   /* context menus on top of all */
 
+  /* ----------------------------- Dialog (Frame 37764) ------------------ */
+  --yt-dialog-bg:      #292d62;   /* dark-blue panel bg          */
+  --yt-dialog-inner:   #1a1c31;   /* near-black inner elements   */
+  --yt-dialog-accent:  #5965eb;   /* bright-blue accents         */
+  --yt-dialog-text:    #DDDFE9;   /* light-gray body text        */
+  --yt-dialog-badge:   #ca5056;   /* orange accent badge         */
+
   /* ----------------------------- Collection gradients ---------------- */
   --yt-collection-gaming:        linear-gradient(135deg, #6b46c1 0%, #4c1d95 100%);
   --yt-collection-design-code:   linear-gradient(135deg, #0f766e 0%, #064e3b 100%);
   --yt-collection-tech:          linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+
+  /* ----------------------------- Light theme (Settings panel only) ----- */
+  --yt-panel-bg:         #e6d5d8;   /* light-gray panel surface            */
+  --yt-panel-text:       #150228;   /* near-black primary text             */
+  --yt-panel-text-soft:  #6e4a5f;   /* soft mauve-gray secondary text      */
+  --yt-panel-text-dim:   #9a7589;   /* dim tertiary text                   */
+  --yt-panel-border:     rgba(21, 2, 40, 0.10);
+  --yt-panel-accent:     #c9a6ba;   /* mauve accent                        */
+  --yt-panel-accent-dark:#a86c94;   /* darker mauve accent (active/hover)  */
+  --yt-panel-row-hover:  #d8c8d0;   /* option row hover background         */
+  --yt-panel-toggle-bg:  #ffffff;   /* toggle track off                    */
+  --yt-panel-toggle-on:  #a86c94;   /* toggle track on                     */
+  --yt-panel-scrim:      rgba(21, 2, 40, 0.30);
 }

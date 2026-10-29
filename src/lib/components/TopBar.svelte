@@ -77,7 +77,15 @@
     >
       <Icon name="bell" />
     </button>
-    <button class="icon-btn" aria-label="Settings" title="Settings (coming soon)" tabindex={-1}>
+    <button
+      class="icon-btn"
+      aria-label="Settings"
+      title="Settings"
+      onclick={() => {
+        app.openBackdrop();
+        app.openIconGrid();
+      }}
+    >
       <Icon name="gear" />
     </button>
     <!-- theme ring: half red / half blue, decorative -->

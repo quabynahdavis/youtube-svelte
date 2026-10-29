@@ -29,6 +29,13 @@ export interface ContextMenuState {
   y: number;
 }
 
+export interface DialogAction {
+  label: string;
+  icon?: string;
+  variant?: 'primary' | 'secondary' | 'danger';
+  onClick?: () => void;
+}
+
 export interface Personalize {
   /** "Your Tags" pool (white chips) — editable, removable one-offs. */
   mine: string[];
@@ -90,12 +97,28 @@ export class AppStore {
   /** Video quality selector dropdown. */
   qualityOptionsOpen = $state(false);
   chatOpen = $state(false);
+
+  /* ------- dialog ------- */
+  dialogOpen = $state(false);
+  dialogTitle = $state('');
+  dialogBadge = $state<string | undefined>(undefined);
+  dialogActions = $state<DialogAction[]>([]);
+  /** Settings panel overlay. */
+  settingsOpen = $state(false);
   /** Portal for the shared ContextMenu component (card ⋮ menus). */
   contextMenu = $state<ContextMenuState | null>(null);
   /** Position last used to open the video-options dropdown. */
   videoOptionsPos = $state<{ x: number; y: number } | null>(null);
   /** Position + current quality last used to open the quality dropdown. */
   qualityOptionsPos = $state<{ x: number; y: number; currentQuality: string } | null>(null);
+
+  /* ------- backdrop / icon grid picker ------- */
+  /** Full-screen black scrim; shared by the icon grid demo and other overlays. */
+  backdropOpen = $state(false);
+  /** Icon/emoji/avatar picker panel; mounts on top of the backdrop. */
+  iconGridOpen = $state(false);
+  /** Last id picked via IconGrid (drives the selected-tile highlight). */
+  selectedIconId = $state<string | null>(null);
 
   /* ------- feed personalization / hygiene ------- */
   personalize = $state<Personalize>({
@@ -206,6 +229,32 @@ export class AppStore {
     this.chatOpen = false;
   }
 
+  /* ----------------------------- dialog ----------------------------- */
+
+  openDialog(title: string, actions?: DialogAction[], badge?: string): void {
+    this.dialogTitle = title;
+    this.dialogActions = actions ?? [];
+    this.dialogBadge = badge;
+    this.dialogOpen = true;
+  }
+
+  closeDialog(): void {
+    this.dialogOpen = false;
+    this.dialogTitle = '';
+    this.dialogBadge = undefined;
+    this.dialogActions = [];
+  }
+
+  /* ----------------------------- settings panel --------------------- */
+
+  openSettings(): void {
+    this.settingsOpen = true;
+  }
+
+  closeSettings(): void {
+    this.settingsOpen = false;
+  }
+
   /** Handle a card context-menu pick; menu closes whatever the action. */
   runContextAction(action: string): void {
     const menu = this.contextMenu;
@@ -244,6 +293,32 @@ export class AppStore {
   closeQualityOptions(): void {
     this.qualityOptionsOpen = false;
     this.qualityOptionsPos = null;
+  }
+
+  /* ----------------------------- backdrop / icon grid ----------------- */
+
+  openBackdrop(): void {
+    this.backdropOpen = true;
+  }
+
+  closeBackdrop(): void {
+    this.backdropOpen = false;
+  }
+
+  /** Open the picker panel together with its black backdrop. */
+  openIconGrid(): void {
+    this.backdropOpen = true;
+    this.iconGridOpen = true;
+  }
+
+  /** Close the picker panel and its backdrop. */
+  closeIconGrid(): void {
+    this.iconGridOpen = false;
+    this.backdropOpen = false;
+  }
+
+  selectIcon(id: string): void {
+    this.selectedIconId = id;
   }
 }
 
