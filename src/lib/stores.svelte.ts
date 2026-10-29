@@ -14,7 +14,7 @@
 import { getChannel, type Channel, type Video } from './data/catalog';
 
 /** Router-less page ids. `subscriptions` hosts both Subs/Collections tabs. */
-export type Page = 'home' | 'shorts' | 'subscriptions' | 'collections' | 'channel';
+export type Page = 'home' | 'shorts' | 'subscriptions' | 'collections' | 'channel' | 'rewind';
 export type SubsTab = 'subs' | 'collections';
 export type SubsKind = 'all' | 'videos' | 'posts' | 'live' | 'shorts';
 export type SubsSort = 'newest' | 'oldest';
@@ -85,8 +85,17 @@ export class AppStore {
   notifsOpen = $state(false);
   shareOpen = $state(false);
   personalizeOpen = $state(false);
+  /** "More options" dropdown for the video player. */
+  videoOptionsOpen = $state(false);
+  /** Video quality selector dropdown. */
+  qualityOptionsOpen = $state(false);
+  chatOpen = $state(false);
   /** Portal for the shared ContextMenu component (card ⋮ menus). */
   contextMenu = $state<ContextMenuState | null>(null);
+  /** Position last used to open the video-options dropdown. */
+  videoOptionsPos = $state<{ x: number; y: number } | null>(null);
+  /** Position + current quality last used to open the quality dropdown. */
+  qualityOptionsPos = $state<{ x: number; y: number; currentQuality: string } | null>(null);
 
   /* ------- feed personalization / hygiene ------- */
   personalize = $state<Personalize>({
@@ -187,6 +196,16 @@ export class AppStore {
     this.contextMenu = null;
   }
 
+  /* ----------------------------- live chat -------------------------- */
+
+  openChat(): void {
+    this.chatOpen = true;
+  }
+
+  closeChat(): void {
+    this.chatOpen = false;
+  }
+
   /** Handle a card context-menu pick; menu closes whatever the action. */
   runContextAction(action: string): void {
     const menu = this.contextMenu;
@@ -201,6 +220,30 @@ export class AppStore {
       this.hiddenChannels = [...new Set([...this.hiddenChannels, video.channel])];
     }
     // add-to-queue / watch-later / add-to-playlist / report → no-ops (v1)
+  }
+
+  /* ----------------------------- video options --------------------- */
+
+  openVideoOptions(x: number, y: number): void {
+    this.videoOptionsOpen = true;
+    this.videoOptionsPos = { x, y };
+  }
+
+  closeVideoOptions(): void {
+    this.videoOptionsOpen = false;
+    this.videoOptionsPos = null;
+  }
+
+  /* ----------------------------- quality options ------------------- */
+
+  openQualityOptions(x: number, y: number, currentQuality: string): void {
+    this.qualityOptionsOpen = true;
+    this.qualityOptionsPos = { x, y, currentQuality };
+  }
+
+  closeQualityOptions(): void {
+    this.qualityOptionsOpen = false;
+    this.qualityOptionsPos = null;
   }
 }
 

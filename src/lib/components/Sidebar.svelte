@@ -40,6 +40,7 @@
     {
       items: [
         { label: 'History', icon: 'history', disabled: true },
+        { label: 'Rewind', icon: 'history', href: '/rewind' },
         { label: 'Watch Later', icon: 'clock', disabled: true },
         { label: 'Liked Videos', icon: 'thumb-up', disabled: true },
       ],
